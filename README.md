@@ -1,7 +1,7 @@
 # Board Game Universe
 
 ## Website
-[BoardGameUniverse on heroku](https://boardgameuniverse.herokuapp.com)
+[Click here](https://boardgameuniverse.herokuapp.com) to enjoy latest commit version.
 
 ## Current status
 Work is currently in progress...
@@ -9,7 +9,7 @@ Work is currently in progress...
 ## Technical information
 Website is quite new and has been initialized as following:
 - [React with ASP.NET core](https://docs.microsoft.com/fr-fr/aspnet/core/client-side/spa/react?view=aspnetcore-6.0&tabs=visual-studio)
-- [Circle as CI/CD platform](https://circleci.com)
+- [CircleCI as CI/CD platform](https://circleci.com)
 - [Heroku as cloud platform](https://heroku.com)
 
 ## Usefull links
