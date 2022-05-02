@@ -4,6 +4,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
+# Setup NodeJs
+RUN apt-get update -y
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash --debug
+Run apt-get install nodejs -yq
+
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY BoardGameUniverse.WebApp/*.csproj ./BoardGameUniverse.WebApp/
