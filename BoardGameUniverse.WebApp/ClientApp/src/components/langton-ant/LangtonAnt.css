@@ -1,0 +1,12 @@
+/* seealso: https://alligator.io/css/viewport-units */
+
+.grid {
+    display: inline-grid;
+    grid-gap: 1px 1px;
+    background-color: #333;
+    border: solid 2px #333;
+}
+
+.cell {
+    background-color: #FFF;
+}
