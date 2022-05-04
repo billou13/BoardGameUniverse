@@ -4,25 +4,21 @@ import { Cell } from './Cell';
 export class Grid extends Component {
     static displayName = Grid.name;
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            cellSize: "50px"
-        };
-    }
-
     render() {
-        const style = {
-            gridTemplateColumns: this.state.cellSize + " " + this.state.cellSize
+        let cells = [];
+        for (let x = 0; x < this.props.columnSize; x++) {
+            for (let y = 0; y < this.props.rowSize; y++) {
+                cells.push({ x, y });
+            }
         }
+
+        const style = {
+            gridTemplateColumns: Array(this.props.columnSize).fill(this.props.cellSize).join(" ")
+        };
 
         return (
             <div className="grid" style={style}>
-                <Cell size={this.state.cellSize} />
-                <Cell size={this.state.cellSize} />
-                <Cell size={this.state.cellSize} />
-                <Cell size={this.state.cellSize} />
+                { cells.map(cell => { return (<Cell key={"cell".concat(cell.x, "-", cell.y)} size={this.props.cellSize} x={cell.x} y={cell.y} />) }) }
             </div>
         );
     }

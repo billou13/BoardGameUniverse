@@ -1,5 +1,9 @@
 /* seealso: https://alligator.io/css/viewport-units */
 
+.board {
+    display: flex;
+}
+
 .grid {
     display: inline-grid;
     grid-gap: 1px 1px;

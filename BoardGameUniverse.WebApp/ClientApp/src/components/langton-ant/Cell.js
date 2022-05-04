@@ -5,14 +5,12 @@ export function Cell(props) {
         }, ...props
     }
 
-    console.log(settings.size)
-
     const style = {
         width: settings.size,
         height: settings.size
     }
 
     return (
-        <div className="cell" style={style} />
+        <div className="cell" style={style} x={props.x} y={props.y} />
     );
 }
