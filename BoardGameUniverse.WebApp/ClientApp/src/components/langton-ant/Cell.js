@@ -1,16 +1,13 @@
 
 export function Cell(props) {
-    const settings = {...{
-            size: "30px"
-        }, ...props
-    }
+    const { size, x, y, color, highlight } = props
 
     const style = {
-        width: settings.size,
-        height: settings.size
+        width: size,
+        height: size
     }
 
     return (
-        <div className="cell" style={style} x={props.x} y={props.y} />
+        <div className={"cell " + (highlight ? "highlight" : color)} style={style} x={x} y={y} />
     );
 }

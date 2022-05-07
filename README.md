@@ -12,12 +12,15 @@ Website is quite new and has been initialized as following:
 ## To-do list
 - [x] Initialize project
 - [x] CI/CD integration
-- [ ] [Fourmi de Langton en React](https://youtu.be/qZRYGxF6D3w)
+- [X] [Fourmi de Langton en React](https://youtu.be/qZRYGxF6D3w)
 - [ ] Marvel Champions
 - [ ] other ideas...
 
 ## Fourmi de Langton
 [grid in react](https://stackoverflow.com/questions/61625766/how-to-create-a-grid-in-react), [game of life](https://www.freecodecamp.org/news/create-gameoflife-with-react-in-one-hour-8e686a410174/), [pixel grid react](https://codesandbox.io/examples/package/pixel-grid-react)
+
+https://design.tutsplus.com/tutorials/quick-tip-how-to-create-an-isometric-grid-in-less-than-2-minutes--vector-3831
+https://www.npmjs.com/package/react-isometric-grid
 
 ## Usefull links
 - [DragnCards](https://github.com/seastan/DragnCards)

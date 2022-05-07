@@ -4,13 +4,30 @@
     display: flex;
 }
 
+.settings > div {
+    margin: 5px 0;
+}
+
 .grid {
+    margin: 0 auto;
     display: inline-grid;
     grid-gap: 1px 1px;
-    background-color: #333;
-    border: solid 2px #333;
+    background-color: #DDD;
+    border: solid 1px #DDD;
 }
 
 .cell {
+    font-size: 0.1em;
+}
+
+.cell.white {
     background-color: #FFF;
+}
+
+.cell.black {
+    background-color: #000;
+}
+
+.cell.highlight {
+    background-color: #F00;
 }
