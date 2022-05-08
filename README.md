@@ -17,10 +17,14 @@ Website is quite new and has been initialized as following:
 - [ ] other ideas...
 
 ## Fourmi de Langton
-[grid in react](https://stackoverflow.com/questions/61625766/how-to-create-a-grid-in-react), [game of life](https://www.freecodecamp.org/news/create-gameoflife-with-react-in-one-hour-8e686a410174/), [pixel grid react](https://codesandbox.io/examples/package/pixel-grid-react)
+- [grid in react](https://stackoverflow.com/questions/61625766/how-to-create-a-grid-in-react)
+- [game of life](https://www.freecodecamp.org/news/create-gameoflife-with-react-in-one-hour-8e686a410174/)
+- [pixel grid react](https://codesandbox.io/examples/package/pixel-grid-react)
+- [isomectric grid](https://design.tutsplus.com/tutorials/quick-tip-how-to-create-an-isometric-grid-in-less-than-2-minutes--vector-3831)
+- [react-isometric-grid](https://www.npmjs.com/package/react-isometric-grid)
 
-https://design.tutsplus.com/tutorials/quick-tip-how-to-create-an-isometric-grid-in-less-than-2-minutes--vector-3831
-https://www.npmjs.com/package/react-isometric-grid
+## Marvel Champions
+- [marvelsdb-json-data](https://github.com/zzorba/marvelsdb-json-data)
 
 ## Usefull links
 - [DragnCards](https://github.com/seastan/DragnCards)

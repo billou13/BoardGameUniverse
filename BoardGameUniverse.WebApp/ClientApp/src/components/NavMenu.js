@@ -42,6 +42,9 @@ export class NavMenu extends Component {
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/langton-ant">Langton's Ant</NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} className="text-dark" to="/marvel-champions">Marvel Champions</NavLink>
+                </NavItem>
               </ul>
             </Collapse>
           </Container>
