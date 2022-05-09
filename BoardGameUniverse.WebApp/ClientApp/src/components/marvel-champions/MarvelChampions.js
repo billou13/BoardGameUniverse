@@ -9,7 +9,11 @@ export class MarvelChampions extends Component {
       <div>
         <h1 id="tabelLabel" >Marvel Champions</h1>
         <div className="mc">
-            <Link to="/marvel-champions/card/01001a">Spider-Man</Link>
+          <ul>
+            <li><Link to="/marvel-champions/card/01001a">Spider-Man</Link></li>
+            <li><Link to="/marvel-champions/card/01052">Chase Them Down</Link></li>
+            <li><Link to="/marvel-champions/card/01074">Inspired</Link></li>
+          </ul>
         </div>
       </div>
     );
