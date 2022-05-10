@@ -18,7 +18,8 @@ public class MarvelChampionsService : IMarvelChampionsService
     {
         try
         {
-            using (var stream = File.OpenRead(@"Json\core.json"))
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json/core.json");
+            using (var stream = File.OpenRead(path))
             {
                 var cards = await JsonSerializer.DeserializeAsync<Card[]>(stream);
                 if (cards == null)
