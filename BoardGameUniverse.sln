@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{B6AF5121-EE5F-4FEC-8151-41778C0D591C}") = "BoardGameUniverse.WebApp", "BoardGameUniverse.WebApp\BoardGameUniverse.WebApp.csproj", "{E640E41F-B6C2-4723-B674-8A53367B724E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameUniverse.MarvelChampions.Tests", "BoardGameUniverse.MarvelChampions.Tests\BoardGameUniverse.MarvelChampions.Tests.csproj", "{246292F8-C672-413F-97BA-6AD8C2E4ADAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{E640E41F-B6C2-4723-B674-8A53367B724E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E640E41F-B6C2-4723-B674-8A53367B724E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E640E41F-B6C2-4723-B674-8A53367B724E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

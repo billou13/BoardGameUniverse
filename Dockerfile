@@ -12,6 +12,7 @@ RUN apt-get update && apt-get upgrade -y && \
 # copy csproj and restore as distinct layers
 COPY *.sln .
 COPY BoardGameUniverse.MarvelChampions/*.csproj ./BoardGameUniverse.MarvelChampions/
+COPY BoardGameUniverse.MarvelChampions.Tests/*.csproj ./BoardGameUniverse.MarvelChampions.Tests/
 COPY BoardGameUniverse.WebApp/*.csproj ./BoardGameUniverse.WebApp/
 RUN dotnet restore
 
