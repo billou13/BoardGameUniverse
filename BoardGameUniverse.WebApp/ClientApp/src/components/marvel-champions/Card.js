@@ -9,8 +9,8 @@ export class Card extends Component {
   }
 
   componentDidMount() {
-    const { code } = this.props
-    this.getCard(code);
+    const { pack, code } = this.props
+    this.getCard(pack, code);
   }
 
   static renderCard(card) {
@@ -25,7 +25,7 @@ export class Card extends Component {
   }
 
   render() {
-    const { code } = this.props
+    const { pack, code } = this.props
 
     let contents = (this.state.card === null)
       ? <p><em>Loading...</em></p>
@@ -35,15 +35,15 @@ export class Card extends Component {
       <div>
         <h1 id="tabelLabel" >Marvel Champions card</h1>
         <div className="mc-card">
-            <p>code: {code}</p>
+            <p>pack: {pack} - code: {code}</p>
             {contents}
         </div>
       </div>
     );
   }
 
-  async getCard(code) {
-    const response = await fetch(`marvelchampions/card?code=${code}`)
+  async getCard(pack, code) {
+    const response = await fetch(`marvelchampions/card?pack=${pack}&code=${code}`)
     const data = await response.json()
     this.setState({ card: data })
   }

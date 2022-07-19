@@ -17,11 +17,19 @@ public class MarvelChampionsController : ControllerBase
         _service = service;
     }
 
-    [HttpGet("card")]
-    public async Task<Card?> GetCard(string code)
+    [HttpGet("cards")]
+    public async Task<Card[]> GetAllCards(string pack)
     {
-        var card = await _service.GetCardAsync(code);
-        _logger.LogDebug($"get card '{code}' returns '{card?.Name}'");
+        var cards = await _service.GetAllCardsAsync(pack);
+        _logger.LogDebug($"get all cards from pack '{pack}' returns '{cards.Count()}' cards");
+        return cards;
+    }
+
+    [HttpGet("card")]
+    public async Task<Card?> GetCard(string pack, string code)
+    {
+        var card = await _service.GetCardAsync(pack, code);
+        _logger.LogDebug($"get card '{code}' from pack '{pack}' returns '{card?.Name}'");
         return card;
     }
 }

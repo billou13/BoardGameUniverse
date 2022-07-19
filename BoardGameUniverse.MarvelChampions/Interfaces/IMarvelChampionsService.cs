@@ -4,5 +4,7 @@ namespace BoardGameUniverse.MarvelChampions.Interfaces;
 
 public interface IMarvelChampionsService
 {
-    Task<Card?> GetCardAsync(string code);
+    Task<Card[]> GetAllCardsAsync(string pack);
+
+    Task<Card?> GetCardAsync(string pack, string code);
 }
