@@ -26,4 +26,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="MarvelChampionsServiceTest.GetAllCardsAsync.cs">
+      <DependentUpon>MarvelChampionsServiceTest.cs</DependentUpon>
+    </Compile>
+    <Compile Update="MarvelChampionsServiceTest.GetCardAsync.cs">
+      <DependentUpon>MarvelChampionsServiceTest.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
