@@ -26,7 +26,7 @@ public partial class MarvelChampionsServiceTest
 
     public MarvelChampionsServiceTest AssertCardsCountIs(int expected)
     {
-        Assert.Equal(_cards.Count(), expected);
+        Assert.Equal(expected, _cards.Count());
         return this;
     }
 

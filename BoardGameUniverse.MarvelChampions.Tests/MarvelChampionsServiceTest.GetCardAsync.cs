@@ -59,19 +59,19 @@ public partial class MarvelChampionsServiceTest
 
     public MarvelChampionsServiceTest AssertNameIs(string expected)
     {
-        Assert.Equal(_card?.Name, expected);
+        Assert.Equal(expected, _card?.Name);
         return this;
     }
 
     public MarvelChampionsServiceTest AssertTypeCodeIs(string expected)
     {
-        Assert.Equal(_card?.TypeCode, expected);
+        Assert.Equal(expected, _card?.TypeCode);
         return this;
     }
 
     public MarvelChampionsServiceTest AssertOctgnIdIs(string expected)
     {
-        Assert.Equal(_card?.OctgnId, expected);
+        Assert.Equal(expected, _card?.OctgnId);
         return this;
     }
 }

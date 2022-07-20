@@ -14,11 +14,29 @@ public class MarvelChampionsService : IMarvelChampionsService
         _logger = logger;
     }
 
+    public async Task<Pack[]> GetAllPacksAsync()
+    {
+        try
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Json/packs.json");
+            using (var stream = File.OpenRead(path))
+            {
+                var packs = await JsonSerializer.DeserializeAsync<Pack[]>(stream);
+                return packs != null ? packs : new Pack[] {};
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while asynchronously getting all packs.");
+            throw;
+        }
+    }
+
     public async Task<Card[]> GetAllCardsAsync(string pack)
     {
         try
         {
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Json/{pack}.json");
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Json/Cards/{pack}.json");
             using (var stream = File.OpenRead(path))
             {
                 var cards = await JsonSerializer.DeserializeAsync<Card[]>(stream);
@@ -27,7 +45,7 @@ public class MarvelChampionsService : IMarvelChampionsService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while getting all cards async.");
+            _logger.LogError(ex, "An error occurred while asynchronously getting all cards.");
             throw;
         }
     }
@@ -51,7 +69,7 @@ public class MarvelChampionsService : IMarvelChampionsService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while getting card async.");
+            _logger.LogError(ex, "An error occurred while asynchronously getting card.");
             throw;
         }
     }

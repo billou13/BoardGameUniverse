@@ -17,6 +17,14 @@ public class MarvelChampionsController : ControllerBase
         _service = service;
     }
 
+    [HttpGet("packs")]
+    public async Task<Pack[]> GetAllPacks()
+    {
+        var packs = await _service.GetAllPacksAsync();
+        _logger.LogDebug($"get all packs returns '{packs.Count()}' packs");
+        return packs;
+    }
+
     [HttpGet("cards")]
     public async Task<Card[]> GetAllCards(string pack)
     {

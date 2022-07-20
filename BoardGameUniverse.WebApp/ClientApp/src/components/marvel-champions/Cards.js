@@ -18,7 +18,7 @@ export class Cards extends Component {
     return (
       <div>
         <div>count: {cards.length}</div>
-        <table>
+        <table className='table table-striped'>
           <thead>
             <tr>
               <th>Name</th>
@@ -32,7 +32,7 @@ export class Cards extends Component {
             </tr>
           </thead>
           <tbody>
-            {cards.map((card) => <CardRow { ...card } />)}
+            {cards.map((card) => <CardRow key={`card-${card.code}`} { ...card } />)}
           </tbody>
         </table>
       </div>
