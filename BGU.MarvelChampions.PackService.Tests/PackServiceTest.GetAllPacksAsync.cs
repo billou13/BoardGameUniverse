@@ -1,9 +1,10 @@
-using BoardGameUniverse.MarvelChampions.Data;
+using BGU.MarvelChampions.PackService.Models;
+using System.Threading.Tasks;
 using Xunit;
 
-namespace BoardGameUniverse.MarvelChampions.Tests;
+namespace BGU.MarvelChampions.PackService.Tests;
 
-public partial class MarvelChampionsServiceTest
+public partial class PackServiceTest
 {
     private Pack[] _packs;
 
@@ -14,23 +15,23 @@ public partial class MarvelChampionsServiceTest
         var test = await WhenGettingAllPacksAsync();
 
         test
-            .AssertPacksCountIs(count)
+            .AssertPacksLengthIs(count)
             .AssertPacksContains(existingCode);
     }
 
-    public async Task<MarvelChampionsServiceTest> WhenGettingAllPacksAsync()
+    public async Task<PackServiceTest> WhenGettingAllPacksAsync()
     {
         _packs = await _service.GetAllPacksAsync();
         return this;
     }
 
-    public MarvelChampionsServiceTest AssertPacksCountIs(int expected)
+    public PackServiceTest AssertPacksLengthIs(int expected)
     {
-        Assert.Equal(expected, _packs.Count());
+        Assert.Equal(expected, _packs.Length);
         return this;
     }
 
-    public MarvelChampionsServiceTest AssertPacksContains(string code)
+    public PackServiceTest AssertPacksContains(string code)
     {
         Assert.Contains(_packs, p => string.Equals(p.Code, code));
         return this;

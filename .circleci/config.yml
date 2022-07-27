@@ -4,6 +4,9 @@ parameters:
   deploy-bgu-mc-cardservice:
     type: boolean
     default: true
+  deploy-bgu-mc-packservice:
+    type: boolean
+    default: true
 
 jobs:
   bgu-mc-cardservice:
@@ -24,9 +27,31 @@ jobs:
           docker push registry.heroku.com/$HEROKU_MC_CARDSERVICE/web                
           curl https://cli-assets.heroku.com/install.sh | sh
           heroku container:release web -a $HEROKU_MC_CARDSERVICE
+  bgu-mc-packservice:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+
+      # build image
+      - run: |         
+          docker info
+          docker build -t aspnetapp -f BGU.MarvelChampions.PackService/Dockerfile .
+
+      # deploy the image
+      - run: |
+          docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
+          docker tag aspnetapp registry.heroku.com/$HEROKU_MC_PACKSERVICE/web
+          docker push registry.heroku.com/$HEROKU_MC_PACKSERVICE/web                
+          curl https://cli-assets.heroku.com/install.sh | sh
+          heroku container:release web -a $HEROKU_MC_PACKSERVICE
 
 workflows:
   deploy-bgu-mc-cardservice:
     when: << pipeline.parameters.deploy-bgu-mc-cardservice >>
     jobs:
       - bgu-mc-cardservice
+  deploy-bgu-mc-packservice:
+    when: << pipeline.parameters.deploy-bgu-mc-packservice >>
+    jobs:
+      - bgu-mc-packservice

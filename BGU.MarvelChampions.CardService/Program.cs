@@ -1,7 +1,12 @@
 using BGU.MarvelChampions.CardService.Services;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
+using System;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -40,7 +45,7 @@ try
 
     if (!app.Environment.IsDevelopment())
     {
-        var port = Environment.GetEnvironmentVariable("PORT") ?? "7170";
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "7000";
         app.Run("http://0.0.0.0:" + port);
     }
     else

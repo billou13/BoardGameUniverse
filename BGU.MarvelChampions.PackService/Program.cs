@@ -1,7 +1,12 @@
-using BoardGameUniverse.MarvelChampions;
-using BoardGameUniverse.MarvelChampions.Interfaces;
+using BGU.MarvelChampions.PackService.Services;
+using BGU.MarvelChampions.PackService.Services.Interfaces;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using NLog;
 using NLog.Web;
+using System;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init main");
@@ -11,36 +16,36 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-    builder.Services.AddControllersWithViews();
-    builder.Services.AddSingleton<IMarvelChampionsService, MarvelChampionsService>();
+
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    builder.Services.AddScoped<IPackService, PackService>();;
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
-    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
     builder.Host.UseNLog();
 
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
-    if (!app.Environment.IsDevelopment())
+    if (app.Environment.IsDevelopment())
     {
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
+        app.UseSwagger();
+        app.UseSwaggerUI();
     }
 
     app.UseHttpsRedirection();
-    app.UseStaticFiles();
-    app.UseRouting();
 
-    app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller}/{action=Index}/{id?}");
+    app.UseAuthorization();
 
-    app.MapFallbackToFile("index.html");;
+    app.MapControllers();
 
     if (!app.Environment.IsDevelopment())
     {
-        var port = Environment.GetEnvironmentVariable("PORT") ?? "7200";
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "7001";
         app.Run("http://0.0.0.0:" + port);
     }
     else

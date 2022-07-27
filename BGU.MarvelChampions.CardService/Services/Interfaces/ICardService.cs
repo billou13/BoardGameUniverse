@@ -1,4 +1,5 @@
 using BGU.MarvelChampions.CardService.Models;
+using System.Threading.Tasks;
 
 namespace BGU.MarvelChampions.CardService.Services.Interfaces;
 

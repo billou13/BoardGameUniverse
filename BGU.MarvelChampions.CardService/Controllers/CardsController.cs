@@ -1,6 +1,9 @@
 using BGU.MarvelChampions.CardService.Models;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BGU.MarvelChampions.CardService.Controllers;
 
@@ -21,7 +24,7 @@ public class CardsController : ControllerBase
     public async Task<IEnumerable<Card>> Get(string pack)
     {
         var cards = await _service.GetAllCardsAsync(pack);
-        _logger.LogDebug($"get all cards from pack '{pack}' returns '{cards.Count()}' cards");
+        _logger.LogDebug($"get all cards from pack '{pack}' returns '{cards.Length}' cards");
         return cards;
     }
 }

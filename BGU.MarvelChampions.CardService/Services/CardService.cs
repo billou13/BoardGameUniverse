@@ -1,6 +1,10 @@
 using BGU.MarvelChampions.CardService.Models;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
+using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace BGU.MarvelChampions.CardService.Services;
 

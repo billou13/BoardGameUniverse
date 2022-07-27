@@ -1,4 +1,5 @@
 using BGU.MarvelChampions.CardService.Models;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace BGU.MarvelChampions.CardService.Tests;
@@ -14,7 +15,7 @@ public partial class CardServiceTest
         var test = await WhenGettingAllCardsAsync(pack);
 
         test
-            .AssertCardsCountIs(count)
+            .AssertCardsLengthIs(count)
             .AssertCardsContains(existingCode);
     }
 
@@ -24,9 +25,9 @@ public partial class CardServiceTest
         return this;
     }
 
-    public CardServiceTest AssertCardsCountIs(int expected)
+    public CardServiceTest AssertCardsLengthIs(int expected)
     {
-        Assert.Equal(expected, _cards.Count());
+        Assert.Equal(expected, _cards.Length);
         return this;
     }
 
