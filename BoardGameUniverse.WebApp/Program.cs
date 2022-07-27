@@ -1,5 +1,3 @@
-using BoardGameUniverse.MarvelChampions;
-using BoardGameUniverse.MarvelChampions.Interfaces;
 using NLog;
 using NLog.Web;
 
@@ -12,7 +10,7 @@ try
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
-    builder.Services.AddSingleton<IMarvelChampionsService, MarvelChampionsService>();
+    builder.Services.AddHttpClient();
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();

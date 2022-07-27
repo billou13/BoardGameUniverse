@@ -1,43 +1,49 @@
-using BoardGameUniverse.MarvelChampions.Data;
-using BoardGameUniverse.MarvelChampions.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameUniverse.WebApp.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class MarvelChampionsController : ControllerBase
+public class MarvelChampionsController : ApiGatewayController
 {
+    private readonly IConfiguration _configuration;
     private readonly ILogger<MarvelChampionsController> _logger;
-    private readonly IMarvelChampionsService _service;
 
-    public MarvelChampionsController(ILogger<MarvelChampionsController> logger, IMarvelChampionsService service)
+    private string CardServiceRootUrl
     {
+        get { return _configuration["ApiGateway:RootUrls:CardService"]; }
+    }
+
+    private string PackServiceRootUrl
+    {
+        get { return _configuration["ApiGateway:RootUrls:PackService"]; }
+    }
+
+    public MarvelChampionsController(IConfiguration configuration, ILogger<MarvelChampionsController> logger, IHttpClientFactory httpClientFactory)
+        : base (httpClientFactory)
+    {
+        _configuration = configuration;
         _logger = logger;
-        _service = service;
     }
 
     [HttpGet("packs")]
-    public async Task<Pack[]> GetAllPacks()
+    public async Task<string> GetAllPacks()
     {
-        var packs = await _service.GetAllPacksAsync();
-        _logger.LogDebug($"get all packs returns '{packs.Count()}' packs");
-        return packs;
+        var response = await TransferRequest($"{PackServiceRootUrl}/packs");
+        return await response.Content.ReadAsStringAsync();
     }
 
     [HttpGet("cards")]
-    public async Task<Card[]> GetAllCards(string pack)
+    public async Task<string> GetAllCards(string pack)
     {
-        var cards = await _service.GetAllCardsAsync(pack);
-        _logger.LogDebug($"get all cards from pack '{pack}' returns '{cards.Count()}' cards");
-        return cards;
+        var response = await TransferRequest($"{CardServiceRootUrl}/cards?pack={pack}");
+        return await response.Content.ReadAsStringAsync();
     }
 
     [HttpGet("card")]
-    public async Task<Card?> GetCard(string pack, string code)
+    public async Task<string> GetCard(string pack, string code)
     {
-        var card = await _service.GetCardAsync(pack, code);
-        _logger.LogDebug($"get card '{code}' from pack '{pack}' returns '{card?.Name}'");
-        return card;
+        var response = await TransferRequest($"{CardServiceRootUrl}/card?pack={pack}&code={code}");
+        return await response.Content.ReadAsStringAsync();
     }
 }
