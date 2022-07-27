@@ -1,23 +1,82 @@
-version: 2
+version: 2.1
+
+parameters:
+  deploy-cardservice:
+    type: boolean
+    default: false
+  deploy-packservice:
+    type: boolean
+    default: false
+  deploy-webapp:
+    type: boolean
+    default: false
+
 jobs:
- build:
-   branches:
-     only:
-       - main
-       - /rc-.*/
-   machine: true
-   steps:
-     - checkout
+  bgu-mc-cardservice:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
 
-     # build image
-     - run: |         
-         docker info
-         docker build -t aspnetapp -f Dockerfile .
+      # build image
+      - run: |
+          docker info
+          docker build -t aspnetapp -f BGU.MarvelChampions.CardService/Dockerfile .
 
-     # deploy the image
-     - run: |         
-         docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
-         docker tag aspnetapp registry.heroku.com/$HEROKU_APP_NAME/web
-         docker push registry.heroku.com/$HEROKU_APP_NAME/web                
-         curl https://cli-assets.heroku.com/install.sh | sh
-         heroku container:release web -a $HEROKU_APP_NAME
+      # deploy the image
+      - run: |
+          docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
+          docker tag aspnetapp registry.heroku.com/$HEROKU_MC_CARDSERVICE/web
+          docker push registry.heroku.com/$HEROKU_MC_CARDSERVICE/web                
+          curl https://cli-assets.heroku.com/install.sh | sh
+          heroku container:release web -a $HEROKU_MC_CARDSERVICE
+  bgu-mc-packservice:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+
+      # build image
+      - run: |
+          docker info
+          docker build -t aspnetapp -f BGU.MarvelChampions.PackService/Dockerfile .
+
+      # deploy the image
+      - run: |
+          docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
+          docker tag aspnetapp registry.heroku.com/$HEROKU_MC_PACKSERVICE/web
+          docker push registry.heroku.com/$HEROKU_MC_PACKSERVICE/web                
+          curl https://cli-assets.heroku.com/install.sh | sh
+          heroku container:release web -a $HEROKU_MC_PACKSERVICE
+  bgu-webapp:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+
+      # build image
+      - run: |
+          docker info
+          docker build -t aspnetapp -f BoardGameUniverse.WebApp/Dockerfile .
+
+      # deploy the image
+      - run: |
+          docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
+          docker tag aspnetapp registry.heroku.com/$HEROKU_WEBAPP/web
+          docker push registry.heroku.com/$HEROKU_WEBAPP/web                
+          curl https://cli-assets.heroku.com/install.sh | sh
+          heroku container:release web -a $HEROKU_WEBAPP
+
+workflows:
+  deploy-bgu-mc-cardservice:
+    when: << pipeline.parameters.deploy-cardservice >>
+    jobs:
+      - bgu-mc-cardservice
+  deploy-bgu-mc-packservice:
+    when: << pipeline.parameters.deploy-packservice >>
+    jobs:
+      - bgu-mc-packservice
+  deploy-bgu-webapp:
+    when: << pipeline.parameters.deploy-webapp >>
+    jobs:
+      - bgu-webapp

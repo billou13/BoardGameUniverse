@@ -60,9 +60,5 @@
     <Exec Command="echo ProjectDir: $(ProjectDir)" />
     <Exec Command="echo TargetDir: $(TargetDir)" />
     <Exec Command="echo PublishDir: $(PublishDir)" />
-    <Exec Command="echo list $(TargetDir)Json" />
-    <Exec Command="ls $(TargetDir)Json" />
-    <Exec Command="echo list $(PublishDir)Json" />
-    <Exec Command="ls $(PublishDir)Json" />
   </Target>
 </Project>

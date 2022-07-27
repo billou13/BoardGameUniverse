@@ -11,7 +11,7 @@
     "BoardGameUniverse.WebApp": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7239;http://localhost:5022",
+      "applicationUrl": "https://localhost:7200;http://localhost:5200",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
