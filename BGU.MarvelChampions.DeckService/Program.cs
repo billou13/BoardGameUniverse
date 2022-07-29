@@ -1,6 +1,8 @@
+using BGU.MarvelChampions.DeckService.Database;
 using BGU.MarvelChampions.DeckService.Services;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +23,15 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    builder.Services.AddDbContext<DeckDbContext>(
+        options =>
+        {
+            options
+                .UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"))
+                .UseSnakeCaseNamingConvention();
+        }
+    );
 
     builder.Services.AddScoped<IDeckService, DeckService>();
 

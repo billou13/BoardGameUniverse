@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BGU.MarvelChampions.CardService.Controllers;
+namespace BGU.MarvelChampions.DeckService.Controllers;
 
 [ApiController]
 public class RootController : ControllerBase

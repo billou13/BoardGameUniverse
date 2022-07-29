@@ -35,7 +35,8 @@
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "DATABASE_URL": "${env:DATABASE_URL}"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

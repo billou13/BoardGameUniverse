@@ -1,10 +1,11 @@
-﻿using BGU.MarvelChampions.DeckService.Services.Interfaces;
+﻿using BGU.MarvelChampions.DeckService.Database;
+using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
 using Services = BGU.MarvelChampions.DeckService.Services;
 
-namespace BGU.MarvelChampions.CardService.Tests;
+namespace BGU.MarvelChampions.DeckService.Tests;
 
 public partial class DeckServiceTest
 {
@@ -13,6 +14,7 @@ public partial class DeckServiceTest
     public DeckServiceTest()
     {
         var logger = Substitute.For<ILogger<Services.DeckService>>();
-        _service = new Services.DeckService(logger);
+        var dbContext = Substitute.For<DeckDbContext>();
+        _service = new Services.DeckService(logger, dbContext);
     }
 }

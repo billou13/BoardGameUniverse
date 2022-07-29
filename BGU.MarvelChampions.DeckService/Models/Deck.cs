@@ -13,4 +13,7 @@ public class Deck
 
     [JsonPropertyName("createDate")]
     public DateTime? CreateDate { get; set; }
+
+    [JsonPropertyName("updateDate")]
+    public DateTime? UpdateDate { get; set; }
 }
