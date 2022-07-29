@@ -1,5 +1,5 @@
-using BGU.MarvelChampions.CardService.Services;
-using BGU.MarvelChampions.CardService.Services.Interfaces;
+using BGU.MarvelChampions.DeckService.Services;
+using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,7 +22,7 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddScoped<ICardService, CardService>();
+    builder.Services.AddScoped<IDeckService, DeckService>();
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
@@ -45,7 +45,7 @@ try
 
     if (!app.Environment.IsDevelopment())
     {
-        var port = Environment.GetEnvironmentVariable("PORT") ?? "7000";
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "7002";
         app.Run("http://0.0.0.0:" + port);
     }
     else

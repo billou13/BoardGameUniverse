@@ -8,6 +8,8 @@ Website is quite new and has been initialized as following:
 - [React with ASP.NET core](https://docs.microsoft.com/fr-fr/aspnet/core/client-side/spa/react?view=aspnetcore-6.0&tabs=visual-studio)
 - [CircleCI as CI/CD platform](https://circleci.com)
 - [Heroku as cloud platform](https://heroku.com)
+    - [Heroku Postgres](https://elements.heroku.com/addons/heroku-postgresql)
+    - [Heroku Redis](https://elements.heroku.com/addons/heroku-redis)
 
 ## To-do list
 - [x] Initialize project
