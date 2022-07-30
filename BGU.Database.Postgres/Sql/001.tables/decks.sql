@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS decks (
+  guid UUID NOT NULL,
+  name VARCHAR ( 255 ) UNIQUE NOT NULL,
+  create_date TIMESTAMP NOT NULL,
+  update_date TIMESTAMP NOT NULL,
+  delete_date TIMESTAMP,
+  PRIMARY KEY (guid)
+);

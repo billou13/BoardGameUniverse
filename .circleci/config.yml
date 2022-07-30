@@ -4,6 +4,9 @@ parameters:
   deploy-cardservice:
     type: boolean
     default: false
+  deploy-deckservice:
+    type: boolean
+    default: false
   deploy-packservice:
     type: boolean
     default: false
@@ -12,7 +15,12 @@ parameters:
     default: false
 
 jobs:
-  bgu-mc-cardservice:
+  build-n-push:
+    parameters:
+      docker-file:
+        type: string
+      app-name:
+        type: string
     machine:
       image: ubuntu-2004:202010-01
     steps:
@@ -21,62 +29,38 @@ jobs:
       # build image
       - run: |
           docker info
-          docker build -t aspnetapp -f BGU.MarvelChampions.CardService/Dockerfile .
+          docker build -t aspnetapp -f << parameters.docker-file >> .
 
       # deploy the image
       - run: |
           docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
-          docker tag aspnetapp registry.heroku.com/$HEROKU_MC_CARDSERVICE/web
-          docker push registry.heroku.com/$HEROKU_MC_CARDSERVICE/web                
+          docker tag aspnetapp registry.heroku.com/<< parameters.app-name >>/web
+          docker push registry.heroku.com/<< parameters.app-name >>/web                
           curl https://cli-assets.heroku.com/install.sh | sh
-          heroku container:release web -a $HEROKU_MC_CARDSERVICE
-  bgu-mc-packservice:
-    machine:
-      image: ubuntu-2004:202010-01
-    steps:
-      - checkout
-
-      # build image
-      - run: |
-          docker info
-          docker build -t aspnetapp -f BGU.MarvelChampions.PackService/Dockerfile .
-
-      # deploy the image
-      - run: |
-          docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
-          docker tag aspnetapp registry.heroku.com/$HEROKU_MC_PACKSERVICE/web
-          docker push registry.heroku.com/$HEROKU_MC_PACKSERVICE/web                
-          curl https://cli-assets.heroku.com/install.sh | sh
-          heroku container:release web -a $HEROKU_MC_PACKSERVICE
-  bgu-webapp:
-    machine:
-      image: ubuntu-2004:202010-01
-    steps:
-      - checkout
-
-      # build image
-      - run: |
-          docker info
-          docker build -t aspnetapp -f BoardGameUniverse.WebApp/Dockerfile .
-
-      # deploy the image
-      - run: |
-          docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
-          docker tag aspnetapp registry.heroku.com/$HEROKU_WEBAPP/web
-          docker push registry.heroku.com/$HEROKU_WEBAPP/web                
-          curl https://cli-assets.heroku.com/install.sh | sh
-          heroku container:release web -a $HEROKU_WEBAPP
+          heroku container:release web -a << parameters.app-name >>    
 
 workflows:
   deploy-bgu-mc-cardservice:
     when: << pipeline.parameters.deploy-cardservice >>
     jobs:
-      - bgu-mc-cardservice
+      - build-n-push:
+          docker-file: 'BGU.MarvelChampions.CardService/Dockerfile'
+          app-name: '$HEROKU_MC_CARDSERVICE'
+  deploy-bgu-mc-deckservice:
+    when: << pipeline.parameters.deploy-deckservice >>
+    jobs:
+      - build-n-push:
+          docker-file: 'BGU.MarvelChampions.DeckService/Dockerfile'
+          app-name: '$HEROKU_MC_DECKSERVICE'
   deploy-bgu-mc-packservice:
     when: << pipeline.parameters.deploy-packservice >>
     jobs:
-      - bgu-mc-packservice
+      - build-n-push:
+          docker-file: 'BGU.MarvelChampions.PackService/Dockerfile'
+          app-name: '$HEROKU_MC_PACKSERVICE'
   deploy-bgu-webapp:
     when: << pipeline.parameters.deploy-webapp >>
     jobs:
-      - bgu-webapp
+      - build-n-push:
+          docker-file: 'BoardGameUniverse.WebApp/Dockerfile'
+          app-name: '$HEROKU_WEBAPP'
