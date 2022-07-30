@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{51091B93-8BAD-4358-BCF1-BEA35D412B9D}") = "BGU.Database.Postgres", "BGU.Database.Postgres\BGU.Database.Postgres.csproj", "{36D8477A-AEE0-4070-A035-DCF7D7C870C4}"
+EndProject
+Project("{85887CBE-3C90-4042-A432-84BABF971993}") = "BGU.Database.Postgres.Tests", "BGU.Database.Postgres.Tests\BGU.Database.Postgres.Tests.csproj", "{C06C8B31-C506-45BF-B6B4-B8B87198B499}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGU.MarvelChampions.CardService", "BGU.MarvelChampions.CardService\BGU.MarvelChampions.CardService.csproj", "{246292F8-C672-413F-97BA-6AD8C2E4ADAB}"
 EndProject
 Project("{6F309839-A5AD-4B4E-AE2D-A3C8ADD5F26C}") = "BGU.MarvelChampions.CardService.Tests", "BGU.MarvelChampions.CardService.Tests\BGU.MarvelChampions.CardService.Tests.csproj", "{F313F6E5-16D9-4BA5-BE7E-A0EA20272F68}"
@@ -26,6 +30,14 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36D8477A-AEE0-4070-A035-DCF7D7C870C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D8477A-AEE0-4070-A035-DCF7D7C870C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D8477A-AEE0-4070-A035-DCF7D7C870C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D8477A-AEE0-4070-A035-DCF7D7C870C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C06C8B31-C506-45BF-B6B4-B8B87198B499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06C8B31-C506-45BF-B6B4-B8B87198B499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06C8B31-C506-45BF-B6B4-B8B87198B499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06C8B31-C506-45BF-B6B4-B8B87198B499}.Release|Any CPU.Build.0 = Release|Any CPU
 		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,4 +1,4 @@
-﻿using BGU.MarvelChampions.DeckService.Database;
+﻿using BGU.Database.Postgres;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using NSubstitute;

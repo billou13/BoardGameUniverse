@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using BGU.MarvelChampions.DeckService.Database.Entities;
+using BGU.Database.Postgres.Entities;
 
-namespace BGU.MarvelChampions.DeckService.Database;
+namespace BGU.Database.Postgres;
 
 public class DeckDbContext : DbContext
 {

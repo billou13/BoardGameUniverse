@@ -1,5 +1,5 @@
-using BGU.MarvelChampions.DeckService.Database;
-using BGU.MarvelChampions.DeckService.Database.Entities;
+using BGU.Database.Postgres;
+using BGU.Database.Postgres.Entities;
 using BGU.MarvelChampions.DeckService.Models;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;

@@ -1,8 +1,7 @@
-using BGU.MarvelChampions.DeckService.Database;
+using BGU.Database.Postgres;
 using BGU.MarvelChampions.DeckService.Services;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
@@ -24,14 +23,7 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddDbContext<DeckDbContext>(
-        options =>
-        {
-            options
-                .UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"))
-                .UseSnakeCaseNamingConvention();
-        }
-    );
+    builder.Services.ConfigurePostgres(Environment.GetEnvironmentVariable("DATABASE_URL"));
 
     builder.Services.AddScoped<IDeckService, DeckService>();
 

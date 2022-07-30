@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace BGU.MarvelChampions.DeckService.Database.Entities;
+namespace BGU.Database.Postgres.Entities;
 
 public class DeckEntity
 {

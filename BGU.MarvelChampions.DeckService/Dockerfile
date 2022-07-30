@@ -5,6 +5,10 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 # copy csproj and restore as distinct layers
+COPY BGU.Database.Postgres/*.csproj ./BGU.Database.Postgres/
+WORKDIR /src/BGU.Database.Postgres
+RUN dotnet restore
+WORKDIR /src
 COPY BGU.MarvelChampions.DeckService/*.csproj ./BGU.MarvelChampions.DeckService/
 WORKDIR /src/BGU.MarvelChampions.DeckService
 RUN dotnet restore
