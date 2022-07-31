@@ -15,13 +15,20 @@ export class Card extends Component {
 
   static renderCard(card) {
     return (
-      <div>
-        <div>name: {card.name}</div>
-        <div>pack: {card.pack_code}</div>
-        <div>quantity: {card.quantity}</div>
-        <div>type_code: {card.type_code}</div>
-        <div>octgn_id: {card.octgn_id}</div>
-        <div dangerouslySetInnerHTML={{__html: card.text}} />
+      <div className='d-flex'>
+        <div className='flex-shrink-0'>
+          <img src={`marvelchampions/cardimage?code=${card.code}`} alt={card.name} className='img-thumbnail' />
+        </div>
+        <div className='flex-grow-1 ms-3 card'>
+          <div className='card-body'>
+            <h5 className='card-title'>{card.name}</h5>
+            <p class="card-text">pack: {card.pack_code}</p>
+            <p class="card-text">quantity: {card.quantity}</p>
+            <p class="card-text">type_code: {card.type_code}</p>
+            <p class="card-text">octgn_id: {card.octgn_id}</p>
+            <p class="card-text" dangerouslySetInnerHTML={{__html: card.text}} />
+          </div>
+        </div>
       </div>
     );
   }
@@ -37,7 +44,6 @@ export class Card extends Component {
       <div>
         <h1 id="tabelLabel" >Marvel Champions card</h1>
         <div className="mc-card">
-            <p>code: {code}</p>
             {contents}
         </div>
       </div>
