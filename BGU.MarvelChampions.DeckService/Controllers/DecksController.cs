@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.DeckService.Models;
+using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

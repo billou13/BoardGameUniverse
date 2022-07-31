@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BGU.Database.Postgres\BGU.Database.Postgres.csproj" />
+    <ProjectReference Include="..\BGU.MarvelChampions\BGU.MarvelChampions.csproj" />
   </ItemGroup>
 
 </Project>

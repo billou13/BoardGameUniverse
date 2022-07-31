@@ -5,6 +5,10 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
 # copy csproj and restore as distinct layers
+COPY BGU.MarvelChampions/*.csproj ./BGU.MarvelChampions/
+WORKDIR /src/BGU.MarvelChampions
+RUN dotnet restore
+WORKDIR /src
 COPY BGU.MarvelChampions.PackService/*.csproj ./BGU.MarvelChampions.PackService/
 WORKDIR /src/BGU.MarvelChampions.PackService
 RUN dotnet restore

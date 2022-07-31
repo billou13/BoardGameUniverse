@@ -7,6 +7,8 @@ Project("{51091B93-8BAD-4358-BCF1-BEA35D412B9D}") = "BGU.Database.Postgres", "BG
 EndProject
 Project("{85887CBE-3C90-4042-A432-84BABF971993}") = "BGU.Database.Postgres.Tests", "BGU.Database.Postgres.Tests\BGU.Database.Postgres.Tests.csproj", "{C06C8B31-C506-45BF-B6B4-B8B87198B499}"
 EndProject
+Project("{F0DE6369-4640-4D4E-B770-71D2DDEAC6AC}") = "BGU.MarvelChampions", "BGU.MarvelChampions\BGU.MarvelChampions.csproj", "{B737BB14-A389-422D-8624-653EE6541C78}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGU.MarvelChampions.CardService", "BGU.MarvelChampions.CardService\BGU.MarvelChampions.CardService.csproj", "{246292F8-C672-413F-97BA-6AD8C2E4ADAB}"
 EndProject
 Project("{6F309839-A5AD-4B4E-AE2D-A3C8ADD5F26C}") = "BGU.MarvelChampions.CardService.Tests", "BGU.MarvelChampions.CardService.Tests\BGU.MarvelChampions.CardService.Tests.csproj", "{F313F6E5-16D9-4BA5-BE7E-A0EA20272F68}"
@@ -34,6 +36,10 @@ Global
 		{36D8477A-AEE0-4070-A035-DCF7D7C870C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36D8477A-AEE0-4070-A035-DCF7D7C870C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36D8477A-AEE0-4070-A035-DCF7D7C870C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B737BB14-A389-422D-8624-653EE6541C78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B737BB14-A389-422D-8624-653EE6541C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B737BB14-A389-422D-8624-653EE6541C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B737BB14-A389-422D-8624-653EE6541C78}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C06C8B31-C506-45BF-B6B4-B8B87198B499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C06C8B31-C506-45BF-B6B4-B8B87198B499}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C06C8B31-C506-45BF-B6B4-B8B87198B499}.Release|Any CPU.ActiveCfg = Release|Any CPU

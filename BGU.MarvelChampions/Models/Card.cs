@@ -1,7 +1,7 @@
-using BGU.MarvelChampions.CardService.JsonConverters;
+using BGU.MarvelChampions.JsonConverters;
 using System.Text.Json.Serialization;
 
-namespace BGU.MarvelChampions.CardService.Models;
+namespace BGU.MarvelChampions.Models;
 
 public class Card
 {

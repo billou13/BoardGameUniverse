@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.CardService.Models;
+using BGU.MarvelChampions.Models;
 using System.Threading.Tasks;
 using Xunit;
 

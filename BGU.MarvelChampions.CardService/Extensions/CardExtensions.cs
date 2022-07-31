@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.CardService.Models;
+using BGU.MarvelChampions.Models;
 
 namespace BGU.MarvelChampions.CardService.Extensions;
 

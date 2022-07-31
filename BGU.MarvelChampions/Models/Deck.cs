@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace BGU.MarvelChampions.DeckService.Models;
+namespace BGU.MarvelChampions.Models;
 
 public class Deck
 {

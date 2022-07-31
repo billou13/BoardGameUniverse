@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.DeckService.Models;
+using BGU.MarvelChampions.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

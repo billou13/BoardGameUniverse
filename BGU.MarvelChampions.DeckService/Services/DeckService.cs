@@ -1,6 +1,6 @@
 using BGU.Database.Postgres;
 using BGU.Database.Postgres.Entities;
-using BGU.MarvelChampions.DeckService.Models;
+using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

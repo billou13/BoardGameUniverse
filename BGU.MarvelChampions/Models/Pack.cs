@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace BGU.MarvelChampions.PackService.Models;
+namespace BGU.MarvelChampions.Models;
 
 public class Pack
 {

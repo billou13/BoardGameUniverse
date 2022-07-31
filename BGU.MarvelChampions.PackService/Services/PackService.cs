@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.PackService.Models;
+using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.PackService.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;

@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace BGU.MarvelChampions.CardService.JsonConverters;
+namespace BGU.MarvelChampions.JsonConverters;
 
 public class StringNumberJsonConverter : JsonConverter<string>
 {

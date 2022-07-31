@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.CardService.Models;
+using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

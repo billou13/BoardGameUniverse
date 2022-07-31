@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.PackService.Models;
+using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.PackService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

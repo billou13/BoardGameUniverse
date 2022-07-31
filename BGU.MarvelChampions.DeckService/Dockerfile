@@ -9,6 +9,10 @@ COPY BGU.Database.Postgres/*.csproj ./BGU.Database.Postgres/
 WORKDIR /src/BGU.Database.Postgres
 RUN dotnet restore
 WORKDIR /src
+COPY BGU.MarvelChampions/*.csproj ./BGU.MarvelChampions/
+WORKDIR /src/BGU.MarvelChampions
+RUN dotnet restore
+WORKDIR /src
 COPY BGU.MarvelChampions.DeckService/*.csproj ./BGU.MarvelChampions.DeckService/
 WORKDIR /src/BGU.MarvelChampions.DeckService
 RUN dotnet restore
