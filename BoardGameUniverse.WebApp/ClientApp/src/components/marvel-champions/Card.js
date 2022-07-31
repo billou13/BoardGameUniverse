@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class Card extends Component {
   static displayName = Card.name;
@@ -14,19 +15,24 @@ export class Card extends Component {
   }
 
   static renderCard(card) {
+    let attributes = new Array()
+    if (card.cost) attributes.push('Cost: ' + card.cost)
+    if (card.thwart) attributes.push('Thwart: ' + card.thwart + ' - Attack: ' + card.attack + (card.defense ? ' - Defense: ' + card.defense : ''))
+    if (card.health) attributes.push('Health: ' + card.health + (card.hand_size ? ' - Hand size: ' + card.hand_size : ''))
+
     return (
       <div className='d-flex'>
-        <div className='flex-shrink-0'>
+        <div className='flex-shrink-0 w-25'>
           <img src={`marvelchampions/cardimage?code=${card.code}`} alt={card.name} className='img-thumbnail' />
         </div>
-        <div className='flex-grow-1 ms-3 card'>
+        <div className='flex-grow-1 ms-3 card bg-light'>
+          <h5 className='card-header text-primary'>{card.name}</h5>
           <div className='card-body'>
-            <h5 className='card-title'>{card.name}</h5>
-            <p class="card-text">pack: {card.pack_code}</p>
-            <p class="card-text">quantity: {card.quantity}</p>
-            <p class="card-text">type_code: {card.type_code}</p>
-            <p class="card-text">octgn_id: {card.octgn_id}</p>
-            <p class="card-text" dangerouslySetInnerHTML={{__html: card.text}} />
+            <p className="card-text text-capitalize fw-bold">{card.type_code}<br />{card.traits}</p>
+            {attributes.map((attribute) => <p className='card-text m-0 fs-6'>{attribute}</p>)}
+            <p className="card-text border-primary border-start mt-3 ps-2" dangerouslySetInnerHTML={{__html: card.text}} />
+            <p className="card-text text-secondary fst-italic">#{card.pack_code}</p>
+            {card.back_link ? (<Link to={`/marvel-champions/card/${card.back_link}`}>Back</Link>) : ''}
           </div>
         </div>
       </div>
@@ -34,8 +40,6 @@ export class Card extends Component {
   }
 
   render() {
-    const { code } = this.props
-
     let contents = (this.state.card === null)
       ? <p><em>Loading...</em></p>
       : Card.renderCard(this.state.card);

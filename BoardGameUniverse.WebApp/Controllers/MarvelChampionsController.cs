@@ -60,8 +60,21 @@ public class MarvelChampionsController : ApiGatewayController
         if (!_memoryCache.TryGetValue<string>(cacheKey, out string path))
         {
             var card = await SendHttpGetRequestAsync<Card>($"{CardServiceRootUrl}/card?code={code}");
+            if (card.DuplicateOf != null)
+            {
+                card = await SendHttpGetRequestAsync<Card>($"{CardServiceRootUrl}/card?code={card.DuplicateOf}");
+            }
+
             var pack = await SendHttpGetRequestAsync<Pack>($"{PackServiceRootUrl}/pack?code={card.PackCode}");
-            path = Path.Combine(_env.WebRootPath, $"Img/Cards/{pack.OctgnId}/Cards/{card.OctgnId}.jpg");
+            
+            string suffix = string.Empty;
+            char lastCodeChar = code[code.Length -1];
+            if (Char.IsLetter(lastCodeChar) && lastCodeChar != 'a')
+            {
+                suffix = $".{lastCodeChar}";
+            }
+
+            path = Path.Combine(_env.WebRootPath, $"Img/Cards/{pack.OctgnId}/Cards/{card.OctgnId}{suffix}.jpg");
             
             _memoryCache.Set<string>(cacheKey, path);
         }
