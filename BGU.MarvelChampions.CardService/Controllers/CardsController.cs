@@ -9,20 +9,21 @@ namespace BGU.MarvelChampions.CardService.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CardsController : ControllerBase
+public class CardsController : CardControllerBase
 {
     private readonly ILogger<CardsController> _logger;
-    private readonly ICardService _service;
 
     public CardsController(ILogger<CardsController> logger, ICardService service)
+        : base (service)
     {
         _logger = logger;
-        _service = service;
     }
 
     [HttpGet]
     public async Task<IEnumerable<Card>> Get(string pack)
     {
-        return await _service.GetAllByPackAsync(pack);
+        var cards = await _service.GetAllByPackAsync(pack);
+        await EnrichWithDuplicate(cards);
+        return cards;
     }
 }

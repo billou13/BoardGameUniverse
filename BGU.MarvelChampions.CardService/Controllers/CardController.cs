@@ -8,20 +8,21 @@ namespace BGU.MarvelChampions.CardService.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CardController : ControllerBase
+public class CardController : CardControllerBase
 {
     private readonly ILogger<CardController> _logger;
-    private readonly ICardService _service;
 
     public CardController(ILogger<CardController> logger, ICardService service)
+        : base(service)
     {
         _logger = logger;
-        _service = service;
     }
 
     [HttpGet]
     public async Task<Card?> Get(string code)
     {
-        return await _service.GetAsync(code);
+        var card = await _service.GetAsync(code);
+        await EnrichWithDuplicate(card);
+        return card;
     }
 }
