@@ -14,6 +14,9 @@ public class Card
     [JsonPropertyName("code")]
     public string? Code { get; set; }
 
+    [JsonPropertyName("duplicate_of")]
+    public string? DuplicateOf { get; set; }
+
     [JsonPropertyName("deck_limit")]
     public int? DeckLimit { get; set; }
 
