@@ -22,7 +22,7 @@ public class DeckService : IDeckService
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Deck>> GetAllDecksAsync()
+    public async Task<IEnumerable<Deck>> GetAllAsync()
     {
         var entities = await _dbContext.Decks.ToListAsync();
         return entities.Select(e => new Deck
@@ -34,23 +34,7 @@ public class DeckService : IDeckService
         });
     }
 
-    public async Task<Guid?> CreateDeckAsync(Deck deck)
-    {
-        var newEntry = await _dbContext.Decks.AddAsync(
-            new DeckEntity
-            {
-                Guid = deck.Guid,
-                Name = deck.Name,
-                CreateDate = DateTime.UtcNow,
-                UpdateDate = DateTime.UtcNow
-            }
-        );
-
-        await _dbContext.SaveChangesAsync();
-        return newEntry.Entity.Guid;
-    }
-
-    public async Task<Deck?> GetDeckAsync(Guid guid)
+    public async Task<Deck?> GetAsync(Guid guid)
     {
         var entity = await _dbContext.Decks.FindAsync(guid);
         if (entity == null)
@@ -65,5 +49,21 @@ public class DeckService : IDeckService
             CreateDate = entity.CreateDate,
             UpdateDate = entity.UpdateDate
         };
+    }
+
+    public async Task<Guid?> CreateAsync(Deck deck)
+    {
+        var newEntry = await _dbContext.Decks.AddAsync(
+            new DeckEntity
+            {
+                Guid = deck.Guid,
+                Name = deck.Name,
+                CreateDate = DateTime.UtcNow,
+                UpdateDate = DateTime.UtcNow
+            }
+        );
+
+        await _dbContext.SaveChangesAsync();
+        return newEntry.Entity.Guid;
     }
 }

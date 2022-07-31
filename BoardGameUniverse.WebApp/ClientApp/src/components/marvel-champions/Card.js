@@ -43,7 +43,7 @@ export class Card extends Component {
   }
 
   async getCard(pack, code) {
-    const response = await fetch(`marvelchampions/card?pack=${pack}&code=${code}`)
+    const response = await fetch(`marvelchampions/card?code=${code}`)
     const data = await response.json()
     this.setState({ card: data })
   }

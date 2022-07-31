@@ -9,22 +9,20 @@ namespace BGU.MarvelChampions.PackService.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class PacksController : ControllerBase
+public class PackController : ControllerBase
 {
     private readonly ILogger<PacksController> _logger;
     private readonly IPackService _service;
 
-    public PacksController(ILogger<PacksController> logger, IPackService service)
+    public PackController(ILogger<PacksController> logger, IPackService service)
     {
         _logger = logger;
         _service = service;
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Pack>> Get()
+    public async Task<Pack?> Get(string code)
     {
-        var packs = await _service.GetAllAsync();
-        _logger.LogDebug($"get all packs returns '{packs.Count}' packs");
-        return packs.Values;
+        return await _service.GetAsync(code);
     }
 }

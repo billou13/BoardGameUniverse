@@ -16,13 +16,12 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddMemoryCache();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddScoped<IPackService, PackService>();;
+    builder.Services.AddSingleton<IPackService, PackService>();;
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();

@@ -23,16 +23,6 @@ public class DecksController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<Deck>> Get()
     {
-        return await _service.GetAllDecksAsync();
-        /*var decks = new List<Deck>();
-        decks.Add(new Deck
-        {
-            Guid = System.Guid.NewGuid(),
-            Name = "test",
-            CreateDate = System.DateTime.Now,
-            UpdateDate = System.DateTime.UtcNow
-        });
-
-        return decks;*/
+        return await _service.GetAllAsync();
     }
 }

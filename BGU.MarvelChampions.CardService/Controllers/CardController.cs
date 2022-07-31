@@ -20,8 +20,8 @@ public class CardController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Card?> Get(string pack, string code)
+    public async Task<Card?> Get(string code)
     {
-        return await _service.GetCardAsync(pack, code);
+        return await _service.GetAsync(code);
     }
 }

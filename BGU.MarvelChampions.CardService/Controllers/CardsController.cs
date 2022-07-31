@@ -23,8 +23,6 @@ public class CardsController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<Card>> Get(string pack)
     {
-        var cards = await _service.GetAllCardsAsync(pack);
-        _logger.LogDebug($"get all cards from pack '{pack}' returns '{cards.Length}' cards");
-        return cards;
+        return await _service.GetAllByPackAsync(pack);
     }
 }

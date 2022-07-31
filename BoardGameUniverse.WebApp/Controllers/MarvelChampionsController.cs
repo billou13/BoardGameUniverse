@@ -41,9 +41,9 @@ public class MarvelChampionsController : ApiGatewayController
     }
 
     [HttpGet("card")]
-    public async Task<string> GetCard(string pack, string code)
+    public async Task<string> GetCard(string code)
     {
-        var response = await TransferRequest($"{CardServiceRootUrl}/card?pack={pack}&code={code}");
+        var response = await TransferRequest($"{CardServiceRootUrl}/card?code={code}");
         return await response.Content.ReadAsStringAsync();
     }
 }

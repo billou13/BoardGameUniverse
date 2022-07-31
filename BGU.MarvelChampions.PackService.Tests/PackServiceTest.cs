@@ -1,4 +1,6 @@
 ﻿using BGU.MarvelChampions.PackService.Services.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
@@ -13,6 +15,12 @@ public partial class PackServiceTest
     public PackServiceTest()
     {
         var logger = Substitute.For<ILogger<Services.PackService>>();
-        _service = new Services.PackService(logger);
+        
+        var services = new ServiceCollection();
+        services.AddMemoryCache();
+        var serviceProvider = services.BuildServiceProvider();
+        var memoryCache = serviceProvider.GetService<IMemoryCache>();
+        
+        _service = new Services.PackService(logger, memoryCache);
     }
 }

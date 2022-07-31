@@ -23,13 +23,13 @@ public class DeckController : ControllerBase
     [HttpGet]
     public async Task<Deck?> Get(Guid guid)
     {
-        return await _service.GetDeckAsync(guid);
+        return await _service.GetAsync(guid);
     }
 
     [HttpPost]
     public async Task<Guid?> Create(Deck deck)
     {
-        return await _service.CreateDeckAsync(deck);
+        return await _service.CreateAsync(deck);
     }
 
     /*[HttpPut("{id}")]

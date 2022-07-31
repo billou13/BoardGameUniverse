@@ -9,22 +9,22 @@ public partial class CardServiceTest
     private Card? _card;
 
     [Fact]
-    public async void GetMissingCard()
+    public async void GetMissing()
     {
-        var test = await WhenGettingCardAsync("core", "00000");
+        var test = await WhenGettingAsync("00000");
 
         test
             .AssertCardIsNull();
     }
 
     [Theory]
-    [InlineData("core", "01001a", "hero", "Spider-Man", "18ae183c-de26-4369-8a41-424d58f01631")]
-    [InlineData("core", "01027", "upgrade", "Focused Rage", "b37aeafa-227b-4edf-8b00-7326ae1b45db")]
-    [InlineData("core", "01054", "event", "Uppercut", "30d53042-f68d-4607-afad-257f33099788")]
-    [InlineData("core", "01089", "resource", "Genius", "ec9d5930-031c-493c-920b-32d980409567")]
-    public async void GetExistingCard(string pack, string code, string typeCode, string name, string octgnId)
+    [InlineData("01001a", "hero", "Spider-Man", "18ae183c-de26-4369-8a41-424d58f01631")]
+    [InlineData("01027", "upgrade", "Focused Rage", "b37aeafa-227b-4edf-8b00-7326ae1b45db")]
+    [InlineData("01054", "event", "Uppercut", "30d53042-f68d-4607-afad-257f33099788")]
+    [InlineData("01089", "resource", "Genius", "ec9d5930-031c-493c-920b-32d980409567")]
+    public async void GetExisting(string code, string typeCode, string name, string octgnId)
     {
-        var test = await WhenGettingCardAsync(pack, code);
+        var test = await WhenGettingAsync(code);
 
         test
             .AssertCardIsNotNull()
@@ -34,9 +34,9 @@ public partial class CardServiceTest
             .AssertOctgnIdIs(octgnId);
     }
 
-    public async Task<CardServiceTest> WhenGettingCardAsync(string pack, string code)
+    public async Task<CardServiceTest> WhenGettingAsync(string code)
     {
-        _card = await _service.GetCardAsync(pack, code);
+        _card = await _service.GetAsync(code);
         return this;
     }
 

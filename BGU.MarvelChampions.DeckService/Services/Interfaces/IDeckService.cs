@@ -7,9 +7,9 @@ namespace BGU.MarvelChampions.DeckService.Services.Interfaces;
 
 public interface IDeckService
 {
-    Task<IEnumerable<Deck>> GetAllDecksAsync();
+    Task<IEnumerable<Deck>> GetAllAsync();
 
-    Task<Guid?> CreateDeckAsync(Deck deck);
+    Task<Deck?> GetAsync(Guid guid);
 
-    Task<Deck?> GetDeckAsync(Guid guid);
+    Task<Guid?> CreateAsync(Deck deck);
 }

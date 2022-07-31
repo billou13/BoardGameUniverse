@@ -1,3 +1,4 @@
+using BGU.MarvelChampions.CardService.JsonConverters;
 using System.Text.Json.Serialization;
 
 namespace BGU.MarvelChampions.CardService.Models;
@@ -67,8 +68,8 @@ public class Card
     [JsonPropertyName("type_code")]
     public string? TypeCode { get; set; }
 
-    [JsonPropertyName("cost")]
-    public int? Cost { get; set; }
+    [JsonPropertyName("cost"), JsonConverter(typeof(StringNumberJsonConverter))]
+    public string? Cost { get; set; }
 
     [JsonPropertyName("resource_energy")]
     public int? ResourceEnergy { get; set; }

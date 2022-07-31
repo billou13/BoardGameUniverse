@@ -25,7 +25,7 @@ try
 
     builder.Services.ConfigurePostgres(Environment.GetEnvironmentVariable("DATABASE_URL"));
 
-    builder.Services.AddScoped<IDeckService, DeckService>();
+    builder.Services.AddSingleton<IDeckService, DeckService>();
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();

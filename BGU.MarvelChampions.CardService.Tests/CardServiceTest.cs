@@ -1,4 +1,6 @@
 ﻿using BGU.MarvelChampions.CardService.Services.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 
@@ -13,6 +15,12 @@ public partial class CardServiceTest
     public CardServiceTest()
     {
         var logger = Substitute.For<ILogger<Services.CardService>>();
-        _service = new Services.CardService(logger);
+
+        var services = new ServiceCollection();
+        services.AddMemoryCache();
+        var serviceProvider = services.BuildServiceProvider();
+        var memoryCache = serviceProvider.GetService<IMemoryCache>();
+        
+        _service = new Services.CardService(logger, memoryCache);
     }
 }
