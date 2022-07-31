@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class Card extends Component {
   static displayName = Card.name;
@@ -14,21 +15,31 @@ export class Card extends Component {
   }
 
   static renderCard(card) {
+    let attributes = new Array()
+    if (card.cost) attributes.push('Cost: ' + card.cost)
+    if (card.thwart) attributes.push('Thwart: ' + card.thwart + ' - Attack: ' + card.attack + (card.defense ? ' - Defense: ' + card.defense : ''))
+    if (card.health) attributes.push('Health: ' + card.health + (card.hand_size ? ' - Hand size: ' + card.hand_size : ''))
+
     return (
-      <div>
-        <div>name: {card.name}</div>
-        <div>pack: {card.pack_code}</div>
-        <div>quantity: {card.quantity}</div>
-        <div>type_code: {card.type_code}</div>
-        <div>octgn_id: {card.octgn_id}</div>
-        <div dangerouslySetInnerHTML={{__html: card.text}} />
+      <div className='d-flex'>
+        <div className='flex-shrink-0 w-25'>
+          <img src={`marvelchampions/cardimage?code=${card.code}`} alt={card.name} className='img-thumbnail' />
+        </div>
+        <div className='flex-grow-1 ms-3 card bg-light'>
+          <h5 className='card-header text-primary'>{card.name}</h5>
+          <div className='card-body'>
+            <p className="card-text text-capitalize fw-bold">{card.type_code}<br />{card.traits}</p>
+            {attributes.map((attribute) => <p className='card-text m-0 fs-6'>{attribute}</p>)}
+            <p className="card-text border-primary border-start mt-3 ps-2" dangerouslySetInnerHTML={{__html: card.text}} />
+            <p className="card-text text-secondary fst-italic">#{card.pack_code}</p>
+            {card.back_link ? (<Link to={`/marvel-champions/card/${card.back_link}`}>Back</Link>) : ''}
+          </div>
+        </div>
       </div>
     );
   }
 
   render() {
-    const { code } = this.props
-
     let contents = (this.state.card === null)
       ? <p><em>Loading...</em></p>
       : Card.renderCard(this.state.card);
@@ -37,7 +48,6 @@ export class Card extends Component {
       <div>
         <h1 id="tabelLabel" >Marvel Champions card</h1>
         <div className="mc-card">
-            <p>code: {code}</p>
             {contents}
         </div>
       </div>
