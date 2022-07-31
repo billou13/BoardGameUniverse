@@ -19,7 +19,7 @@ export default class App extends Component {
         <Route path='/langton-ant' component={LangtonAnt} />
         <Route exact path='/marvel-champions' component={MarvelChampions} />
         <Route path='/marvel-champions/cards/:pack' component={CardsHook} />
-        <Route path='/marvel-champions/card/:pack/:code' component={CardHook} />
+        <Route path='/marvel-champions/card/:code' component={CardHook} />
       </Layout>
     );
   }

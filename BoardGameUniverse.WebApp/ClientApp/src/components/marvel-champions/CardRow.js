@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 export function CardRow(props) {
     const { pack_code, code, name, faction_code, cost, type_code, traits, set_code } = props
 
-    const href = `/marvel-champions/card/${pack_code}/${code}`
+    const href = `/marvel-champions/card/${code}`
     
     return (
         <tr>
-            <td data-th="Name"><Link to={href}>{name}</Link></td>
+            <td data-th="Name"><Link to={href}>{name ?? code}</Link></td>
             <td data-th="Class">{faction_code}</td>
             <td data-th="Cost">{cost}</td>
             <td data-th="Type">{type_code}</td>
