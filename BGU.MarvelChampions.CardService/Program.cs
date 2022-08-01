@@ -21,7 +21,7 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddSingleton<ICardService, CardService>();
+    builder.Services.AddScoped<ICardService, CardService>();
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();

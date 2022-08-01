@@ -21,7 +21,7 @@ try
     builder.Services.AddMemoryCache();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddSingleton<IPackService, PackService>();;
+    builder.Services.AddScoped<IPackService, PackService>();;
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
