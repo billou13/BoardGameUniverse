@@ -1,5 +1,6 @@
 using BGU.Database.Postgres;
 using BGU.Database.Postgres.Entities;
+using BGU.Database.Redis.Interfaces;
 using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,13 @@ public class DeckService : IDeckService
 {
     private readonly ILogger<DeckService> _logger;
     private readonly DeckDbContext _dbContext;
+    private readonly IRedisSetDal _redisSetDal;
 
-    public DeckService(ILogger<DeckService> logger, DeckDbContext dbContext)
+    public DeckService(ILogger<DeckService> logger, DeckDbContext dbContext, IRedisSetDal redisSetDal)
     {
         _logger = logger;
         _dbContext = dbContext;
+        _redisSetDal = redisSetDal;
     }
 
     public async Task<IEnumerable<Deck>> GetAllAsync()
@@ -65,5 +68,25 @@ public class DeckService : IDeckService
 
         await _dbContext.SaveChangesAsync();
         return newEntry.Entity.Guid;
+    }
+
+    public async Task<bool> AddCard(DeckCard item)
+    {
+        return await _redisSetDal.AddAsync(GetRedisKey(item.DeckGuid), item.CardCode);
+    }
+
+    public async Task<bool> RemoveCard(DeckCard item)
+    {
+        return await _redisSetDal.RemoveAsync(GetRedisKey(item.DeckGuid), item.CardCode);
+    }
+
+    public async Task<IEnumerable<string>> GetAllCards(Guid deckGuid)
+    {
+        return await _redisSetDal.MembersAsync(GetRedisKey(deckGuid));
+    }
+
+    private string GetRedisKey(Guid deckGuid)
+    {
+        return $"deck:{deckGuid}";
     }
 }

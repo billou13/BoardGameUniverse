@@ -12,4 +12,10 @@ public interface IDeckService
     Task<Deck?> GetAsync(Guid guid);
 
     Task<Guid?> CreateAsync(Deck deck);
+
+    Task<bool> AddCard(DeckCard item);
+
+    Task<bool> RemoveCard(DeckCard item);
+
+    Task<IEnumerable<string>> GetAllCards(Guid deckGuid);
 }

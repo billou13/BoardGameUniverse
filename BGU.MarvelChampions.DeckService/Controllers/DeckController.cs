@@ -31,16 +31,4 @@ public class DeckController : ControllerBase
     {
         return await _service.CreateAsync(deck);
     }
-
-    /*[HttpPut("{id}")]
-    public IActionResult Update(int id, UpdateRequest model)
-    {
-        _userService.Update(id, model);
-    }
-
-    [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
-    {
-        _userService.Delete(id);
-    }*/
 }

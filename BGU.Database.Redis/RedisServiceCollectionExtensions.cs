@@ -9,7 +9,9 @@ public static class RedisServiceCollectionExtensions
     public static IServiceCollection ConfigureRedis(this IServiceCollection services, string connectionUrl)
     {
         services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(RedisInfo.Parse(connectionUrl).ConfigurationString));
-        services.AddScoped<IRedisDal, RedisDal>();
+        
+        services.AddScoped<IRedisSetDal, RedisSetDal>();
+        services.AddScoped<IRedisStringDal, RedisStringDal>();
 
         return services;
     }

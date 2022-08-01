@@ -11,12 +11,12 @@ namespace BGU.MarvelChampions.DeckService.Controllers;
 public class RedisController : ControllerBase
 {
     private readonly ILogger<RedisController> _logger;
-    private readonly IRedisDal _redisDal;
+    private readonly IRedisStringDal _redisStringDal;
 
-    public RedisController(ILogger<RedisController> logger, IRedisDal redisDal)
+    public RedisController(ILogger<RedisController> logger, IRedisStringDal redisStringDal)
     {
         _logger = logger;
-        _redisDal = redisDal;
+        _redisStringDal = redisStringDal;
     }
 
     [HttpGet]
@@ -29,13 +29,20 @@ public class RedisController : ControllerBase
     [Route("set")]
     public async Task<bool> StringSet(string key, string value)
     {
-        return await _redisDal.StringSetAsync(key, value);
+        return await _redisStringDal.SetAsync(key, value);
     }
 
     [HttpGet]
     [Route("get")]
     public async Task<string?> StringGet(string key)
     {
-        return await _redisDal.StringGetAsync(key);
+        return await _redisStringDal.GetAsync(key);
+    }
+
+    [HttpGet]
+    [Route("delete")]
+    public async Task<string?> StringGetAndDeleteAsync(string key)
+    {
+        return await _redisStringDal.GetAndDeleteAsync(key);
     }
 }

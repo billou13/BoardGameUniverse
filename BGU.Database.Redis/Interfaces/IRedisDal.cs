@@ -4,7 +4,5 @@ namespace BGU.Database.Redis.Interfaces;
 
 public interface IRedisDal
 {
-    Task<bool> StringSetAsync(string key, string value);
-
-    Task<string?> StringGetAsync(string key);
+    Task<bool> KeyDeleteAsync(string key);
 }
