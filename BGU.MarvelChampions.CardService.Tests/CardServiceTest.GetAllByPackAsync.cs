@@ -12,6 +12,7 @@ public partial class CardServiceTest
 
     [Theory]
     [InlineData("core", 101, "01065")]
+    [InlineData("drs", 35, "09017")]
     public async void GetAllByPack(string pack, int count, string existingCode)
     {
         var test = await WhenGettingAllByPackAsync(pack);

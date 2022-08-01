@@ -1,4 +1,5 @@
 using BGU.Database.Postgres;
+using BGU.Database.Redis;
 using BGU.MarvelChampions.DeckService.Services;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -23,9 +24,13 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.ConfigurePostgres(Environment.GetEnvironmentVariable("DATABASE_URL"));
+    string postgresUrl = Environment.GetEnvironmentVariable(builder.Configuration["EnvironmentVariables:PostgresDatabaseUrl"]);
+    builder.Services.ConfigurePostgres(postgresUrl);
 
-    builder.Services.AddSingleton<IDeckService, DeckService>();
+    string redisUrl = Environment.GetEnvironmentVariable(builder.Configuration["EnvironmentVariables:RedisDatabaseUrl"]);
+    builder.Services.ConfigureRedis(redisUrl);
+
+    builder.Services.AddScoped<IDeckService, DeckService>();
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();
