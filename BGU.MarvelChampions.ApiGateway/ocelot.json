@@ -106,6 +106,21 @@
             "UpstreamHttpMethod": [ "Get", "Delete" ]
         },
         {
+            "DownstreamPathTemplate": "/image/{url}",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-imageservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/image/{url}",
+            "UpstreamHttpMethod": [ "Get" ]
+        },
+        {
             "DownstreamPathTemplate": "/pack",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {

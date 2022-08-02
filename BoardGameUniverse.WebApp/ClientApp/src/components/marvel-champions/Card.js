@@ -38,7 +38,7 @@ export class Card extends Component {
     return (
       <div className='mc-card d-flex'>
         <div className='flex-shrink-0 w-25'>
-          <img src={`marvelchampions/cardimage?code=${card.code}`} alt={card.name} className='img-thumbnail' />
+          <img src={`${window.API_GATEWAY_URL}/image/card?code=${card.code}`} alt={card.name} className='img-thumbnail' />
         </div>
         <div className='flex-grow-1 ms-3 card bg-light'>
           <h5 className='card-header text-primary'>{card.name}</h5>
