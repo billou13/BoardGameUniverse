@@ -37,7 +37,7 @@ export class MarvelChampions extends Component {
   }
 
   async getAllPacks() {
-    const response = await fetch('marvelchampions/packs')
+    const response = await fetch(`${window.API_GATEWAY_URL}/packs`)
     const data = await response.json()
     this.setState({ packs: data })
   }

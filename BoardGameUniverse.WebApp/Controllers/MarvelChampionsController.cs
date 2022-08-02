@@ -32,27 +32,6 @@ public class MarvelChampionsController : ApiGatewayController
         _env = env;
     }
 
-    [HttpGet("packs")]
-    public async Task<string> GetAllPacks()
-    {
-        var response = await SendHttpRequestAsync(Request.Method, $"{PackServiceRootUrl}/packs");
-        return await response.Content.ReadAsStringAsync();
-    }
-
-    [HttpGet("cards")]
-    public async Task<string> GetAllCards(string pack)
-    {
-        var response = await SendHttpRequestAsync(Request.Method, $"{CardServiceRootUrl}/cards?pack={pack}");
-        return await response.Content.ReadAsStringAsync();
-    }
-
-    [HttpGet("card")]
-    public async Task<string> GetCard(string code)
-    {
-        var response = await SendHttpRequestAsync(Request.Method, $"{CardServiceRootUrl}/card?code={code}");
-        return await response.Content.ReadAsStringAsync();
-    }
-
     [HttpGet("cardimage")]
     public async Task<IActionResult> GetCardImage(string code)
     {
