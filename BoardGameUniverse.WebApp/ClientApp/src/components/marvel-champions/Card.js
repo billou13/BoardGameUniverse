@@ -18,7 +18,7 @@ export class Card extends Component {
     let attributes = new Array()
     if (card.cost) attributes.push('Cost: ' + card.cost)
     if (card.thwart) attributes.push('Thwart: ' + card.thwart + ' - Attack: ' + card.attack + (card.defense ? ' - Defense: ' + card.defense : ''))
-    if (card.health) attributes.push('Health: ' + card.health + (card.hand_size ? ' - Hand size: ' + card.hand_size : ''))
+    if (card.health) attributes.push('Health: ' + card.health + (card.handSize ? ' - Hand size: ' + card.handSize : ''))
 
     return (
       <div className='d-flex'>
@@ -28,11 +28,11 @@ export class Card extends Component {
         <div className='flex-grow-1 ms-3 card bg-light'>
           <h5 className='card-header text-primary'>{card.name}</h5>
           <div className='card-body'>
-            <p className="card-text text-capitalize fw-bold">{card.type_code}<br />{card.traits}</p>
+            <p className="card-text text-capitalize fw-bold">{card.typeCode}<br />{card.traits}</p>
             {attributes.map((attribute) => <p className='card-text m-0 fs-6'>{attribute}</p>)}
             <p className="card-text border-primary border-start mt-3 ps-2" dangerouslySetInnerHTML={{__html: card.text}} />
-            <p className="card-text text-secondary fst-italic">#{card.pack_code}</p>
-            {card.back_link ? (<Link to={`/marvel-champions/card/${card.back_link}`}>Back</Link>) : ''}
+            <p className="card-text text-secondary fst-italic"><Link to={`/marvel-champions/cards/${card.packCode}`}>#{card.packCode}</Link></p>
+            {card.backLink ? (<Link to={`/marvel-champions/card/${card.backLink}`}>Back</Link>) : ''}
           </div>
         </div>
       </div>

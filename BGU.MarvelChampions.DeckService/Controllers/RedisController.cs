@@ -1,7 +1,8 @@
 using BGU.Database.Redis.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace BGU.MarvelChampions.DeckService.Controllers;
@@ -20,29 +21,35 @@ public class RedisController : ControllerBase
     }
 
     [HttpGet]
-    public string Get()
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    public IActionResult Get()
     {
-        return "Redis controller";
+        return Ok("Redis controller");
     }
 
     [HttpGet]
     [Route("set")]
-    public async Task<bool> StringSet(string key, string value)
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    public async Task<IActionResult> StringSet(string key, string value)
     {
-        return await _redisStringDal.SetAsync(key, value);
+        return Ok(await _redisStringDal.SetAsync(key, value));
     }
 
     [HttpGet]
     [Route("get")]
-    public async Task<string?> StringGet(string key)
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> StringGet(string key)
     {
-        return await _redisStringDal.GetAsync(key);
+        var value = await _redisStringDal.GetAsync(key);
+        return value != null ? Ok(value) : NotFound();
     }
 
     [HttpGet]
     [Route("delete")]
-    public async Task<string?> StringGetAndDeleteAsync(string key)
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    public async Task<IActionResult> StringGetAndDeleteAsync(string key)
     {
-        return await _redisStringDal.GetAndDeleteAsync(key);
+        return Ok(await _redisStringDal.GetAndDeleteAsync(key));
     }
 }

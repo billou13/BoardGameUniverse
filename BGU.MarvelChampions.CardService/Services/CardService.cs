@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -21,15 +21,20 @@ public class CardService : ICardService
         _memoryCache = memoryCache;
     }
 
-    public async Task<IEnumerable<Card>> GetAllByPackAsync(string pack)
+    public async Task<SortedList<string, CardEntity>> GetAllByPackAsync(string pack)
     {
         try
         {
             string cacheKey = $"GetAllByPackAsync_{pack}";
-            if (!_memoryCache.TryGetValue<IEnumerable<Card>>(cacheKey, out IEnumerable<Card> cards))
+            if (!_memoryCache.TryGetValue<SortedList<string, CardEntity>>(cacheKey, out SortedList<string, CardEntity> cards))
             {
                 cards = await LoadAllByPackAsync(pack);
-                _memoryCache.Set<IEnumerable<Card>>(cacheKey, cards);
+                if (cards == null)
+                {
+                    return null;
+                }
+
+                _memoryCache.Set<SortedList<string, CardEntity>>(cacheKey, cards);
             }
 
             return cards;
@@ -41,15 +46,15 @@ public class CardService : ICardService
         }
     }
 
-    public async Task<SortedList<string, Card>> GetAllAsync()
+    public async Task<SortedList<string, CardEntity>> GetAllAsync()
     {
         try
         {
             string cacheKey = "GetAllAsync";
-            if (!_memoryCache.TryGetValue<SortedList<string, Card>>(cacheKey, out SortedList<string, Card> cards))
+            if (!_memoryCache.TryGetValue<SortedList<string, CardEntity>>(cacheKey, out SortedList<string, CardEntity> cards))
             {
                 cards = await LoadAllAsync();
-                _memoryCache.Set<SortedList<string, Card>>(cacheKey, cards);
+                _memoryCache.Set<SortedList<string, CardEntity>>(cacheKey, cards);
             }
 
             return cards;
@@ -61,7 +66,7 @@ public class CardService : ICardService
         }
     }
 
-    public async Task<Card?> GetAsync(string code)
+    public async Task<CardEntity?> GetAsync(string code)
     {
         try
         {
@@ -75,19 +80,36 @@ public class CardService : ICardService
         }
     }
 
-    private async Task<IEnumerable<Card>> LoadAllByPackAsync(string pack)
+    private async Task<SortedList<string, CardEntity>> LoadAllByPackAsync(string pack)
     {
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Json/{pack}.json");
+        if (!File.Exists(path))
+        {
+            return null;
+        }
+
+        var result = new SortedList<string, CardEntity>();
         using (var stream = File.OpenRead(path))
         {
-            var cards = await JsonSerializer.DeserializeAsync<Card[]>(stream);
-            return cards != null ? cards : new Card[] {};
+            var cards = await JsonSerializer.DeserializeAsync<CardEntity[]>(stream);
+            if (cards != null)
+            foreach (var card in cards)
+            {
+                if (string.IsNullOrEmpty(card.Code))
+                {
+                    throw new InvalidDataException($"A card without code exists in the '{pack}.json' file.");
+                }
+
+                result.Add(card.Code, card);
+            }
         }
+
+        return result;
     }
 
-    private async Task<SortedList<string, Card>> LoadAllAsync()
+    private async Task<SortedList<string, CardEntity>> LoadAllAsync()
     {
-        var result = new SortedList<string, Card>();
+        var result = new SortedList<string, CardEntity>();
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json");
         foreach (var file in Directory.EnumerateFiles(path, "*.json"))
         {
@@ -95,17 +117,7 @@ public class CardService : ICardService
             if (cards != null)
             foreach (var card in cards)
             {
-                if (string.IsNullOrEmpty(card.Code))
-                {
-                    throw new InvalidDataException($"A card without code exists in the '{file}' file.");
-                }
-
-                if (result.ContainsKey(card.Code))
-                {
-                    continue;
-                }
-
-                result.Add(card.Code, card);
+                result.Add(card.Key, card.Value);
             }
         }
 

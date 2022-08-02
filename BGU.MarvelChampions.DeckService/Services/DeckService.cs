@@ -1,7 +1,6 @@
 using BGU.Database.Postgres;
 using BGU.Database.Postgres.Entities;
 using BGU.Database.Redis.Interfaces;
-using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -25,59 +24,31 @@ public class DeckService : IDeckService
         _redisSetDal = redisSetDal;
     }
 
-    public async Task<IEnumerable<Deck>> GetAllAsync()
+    public async Task<IEnumerable<DeckEntity>> GetAllAsync()
     {
-        var entities = await _dbContext.Decks.ToListAsync();
-        return entities.Select(e => new Deck
-        {
-            Guid = e.Guid,
-            Name = e.Name,
-            CreateDate = e.CreateDate,
-            UpdateDate = e.UpdateDate
-        });
+        return await _dbContext.Decks.ToListAsync();
     }
 
-    public async Task<Deck?> GetAsync(Guid guid)
+    public async Task<DeckEntity?> GetAsync(Guid guid)
     {
-        var entity = await _dbContext.Decks.FindAsync(guid);
-        if (entity == null)
-        {
-            return null;
-        }
-        
-        return new Deck
-        {
-            Guid = entity.Guid,
-            Name = entity.Name,
-            CreateDate = entity.CreateDate,
-            UpdateDate = entity.UpdateDate
-        };
+        return await _dbContext.Decks.FindAsync(guid);
     }
 
-    public async Task<Guid?> CreateAsync(Deck deck)
+    public async Task<Guid?> CreateAsync(DeckEntity deck)
     {
-        var newEntry = await _dbContext.Decks.AddAsync(
-            new DeckEntity
-            {
-                Guid = deck.Guid,
-                Name = deck.Name,
-                CreateDate = DateTime.UtcNow,
-                UpdateDate = DateTime.UtcNow
-            }
-        );
-
+        var newEntry = await _dbContext.Decks.AddAsync(deck);
         await _dbContext.SaveChangesAsync();
         return newEntry.Entity.Guid;
     }
 
-    public async Task<bool> AddCard(DeckCard item)
+    public async Task<bool> AddCard(Guid deckGuid, string cardCode)
     {
-        return await _redisSetDal.AddAsync(GetRedisKey(item.DeckGuid), item.CardCode);
+        return await _redisSetDal.AddAsync(GetRedisKey(deckGuid), cardCode);
     }
 
-    public async Task<bool> RemoveCard(DeckCard item)
+    public async Task<bool> RemoveCard(Guid deckGuid, string cardCode)
     {
-        return await _redisSetDal.RemoveAsync(GetRedisKey(item.DeckGuid), item.CardCode);
+        return await _redisSetDal.RemoveAsync(GetRedisKey(deckGuid), cardCode);
     }
 
     public async Task<IEnumerable<string>> GetAllCards(Guid deckGuid)

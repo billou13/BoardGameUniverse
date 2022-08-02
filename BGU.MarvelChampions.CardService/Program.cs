@@ -1,3 +1,5 @@
+using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 using BGU.MarvelChampions.CardService.Services;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -21,6 +23,11 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddAutoMapper(cfg =>
+    {
+        cfg.CreateMap<CardEntity, Card>();
+    });
+
     builder.Services.AddScoped<ICardService, CardService>();
 
     // NLog: Setup NLog for Dependency injection
@@ -32,6 +39,7 @@ try
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         app.UseSwagger();
         app.UseSwaggerUI();
     }

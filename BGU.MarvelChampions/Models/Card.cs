@@ -8,7 +8,7 @@ public class Card
     [JsonPropertyName("attack"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? Attack { get; set; }
 
-    [JsonPropertyName("back_link"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("backLink"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? BackLink { get; set; }
 
     [JsonPropertyName("code"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -17,22 +17,22 @@ public class Card
     [JsonPropertyName("cost"), JsonConverter(typeof(StringNumberJsonConverter)), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Cost { get; set; }
 
-    [JsonPropertyName("deck_limit"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("deckLimit"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? DeckLimit { get; set; }
 
     [JsonPropertyName("defense"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? Defense { get; set; }
 
-    [JsonPropertyName("duplicate_of"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("duplicateOf"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? DuplicateOf { get; set; }
 
-    [JsonPropertyName("faction_code"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("factionCode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? FactionCode { get; set; }
 
     [JsonPropertyName("flavor"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Flavor { get; set; }
 
-    [JsonPropertyName("hand_size"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("handSize"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? HandSize { get; set; }
 
     [JsonPropertyName("health"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -41,16 +41,16 @@ public class Card
     [JsonPropertyName("hidden"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? Hidden { get; set; }
 
-    [JsonPropertyName("is_unique"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("isUnique"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? IsUnique { get; set; }
 
     [JsonPropertyName("name"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Name { get; set; }
 
-    [JsonPropertyName("octgn_id"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("octgnId"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? OctgnId { get; set; }
 
-    [JsonPropertyName("pack_code"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("packCode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? PackCode { get; set; }
 
     [JsonPropertyName("position"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -59,19 +59,19 @@ public class Card
     [JsonPropertyName("quantity"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? Quantity { get; set; }
 
-    [JsonPropertyName("resource_energy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("resourceEnergy"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? ResourceEnergy { get; set; }
 
-    [JsonPropertyName("resource_mental"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("resourceMental"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? ResourceMental { get; set; }
 
-    [JsonPropertyName("resource_physical"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("resourcePhysical"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? ResourcePhysical { get; set; }
 
-    [JsonPropertyName("resource_wild"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("resourceWild"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? ResourceWild { get; set; }
 
-    [JsonPropertyName("set_code"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("setCode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? SetCode { get; set; }
 
     [JsonPropertyName("text"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -83,6 +83,6 @@ public class Card
     [JsonPropertyName("traits"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Traits { get; set; }
 
-    [JsonPropertyName("type_code"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("typeCode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? TypeCode { get; set; }
 }

@@ -1,10 +1,10 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 
 namespace BGU.MarvelChampions.CardService.Extensions;
 
-public static class CardExtensions
+public static class CardEntityExtensions
 {
-    public static void MergeWith(this Card cardX, Card cardY)
+    public static void MergeWith(this CardEntity cardX, CardEntity cardY)
     {
         cardX.Attack = cardX.Attack ?? cardY.Attack;
         cardX.BackLink = cardX.BackLink ?? cardY.BackLink;

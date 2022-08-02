@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -7,10 +7,10 @@ namespace BGU.MarvelChampions.CardService.Tests;
 
 public partial class CardServiceTest
 {
-    private SortedList<string, Card> _cards;
+    private SortedList<string, CardEntity> _cards;
 
     [Theory]
-    [InlineData(1995, "01003")]
+    [InlineData(1997, "01003")]
     public async void GetAll(int count, string existingCode)
     {
         var test = await WhenGettingAllAsync();

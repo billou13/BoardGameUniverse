@@ -1,6 +1,5 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -8,7 +7,7 @@ namespace BGU.MarvelChampions.CardService.Tests;
 
 public partial class CardServiceTest
 {
-    private IEnumerable<Card> _packCards;
+    private SortedList<string, CardEntity> _packCards;
 
     [Theory]
     [InlineData("core", 101, "01065")]
@@ -18,7 +17,7 @@ public partial class CardServiceTest
         var test = await WhenGettingAllByPackAsync(pack);
 
         test
-            .AssertPackCardsLengthIs(count)
+            .AssertPackCardsCountIs(count)
             .AssertPackCardsContains(existingCode);
     }
 
@@ -28,15 +27,15 @@ public partial class CardServiceTest
         return this;
     }
 
-    public CardServiceTest AssertPackCardsLengthIs(int expected)
+    public CardServiceTest AssertPackCardsCountIs(int expected)
     {
-        Assert.Equal(expected, _packCards.Count());
+        Assert.Equal(expected, _packCards.Count);
         return this;
     }
 
     public CardServiceTest AssertPackCardsContains(string code)
     {
-        Assert.Contains(_packCards, c => string.Equals(c.Code, code));
+        Assert.True(_packCards.ContainsKey(code));
         return this;
     }
 }

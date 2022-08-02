@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace BGU.MarvelChampions.PackService.Controllers;
 
 [ApiController]
+[Route("/")]
 public class RootController : ControllerBase
 {
-    [Route("/")]
-    public string Get()
+    [HttpGet]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    public IActionResult Get()
     {
-        return "Marvel Champions Pack service started.";
+        return Ok("Marvel Champions Pack service started.");
     }
 }

@@ -1,5 +1,7 @@
 using BGU.Database.Postgres;
+using BGU.Database.Postgres.Entities;
 using BGU.Database.Redis;
+using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.DeckService.Services;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -18,11 +20,15 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
-
     builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    builder.Services.AddAutoMapper(cfg =>
+    {
+        cfg.CreateMap<DeckEntity, Deck>();
+        cfg.CreateMap<Deck, DeckEntity>();
+    });
 
     string postgresUrl = Environment.GetEnvironmentVariable(builder.Configuration["EnvironmentVariables:PostgresDatabaseUrl"]);
     builder.Services.ConfigurePostgres(postgresUrl);
@@ -41,6 +47,7 @@ try
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         app.UseSwagger();
         app.UseSwaggerUI();
     }

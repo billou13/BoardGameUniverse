@@ -4,22 +4,22 @@ namespace BGU.MarvelChampions.Models;
 
 public class Pack
 {
-    [JsonPropertyName("cgdb_id"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("cgdbId"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public int? CgdbId { get; set; }
 
     [JsonPropertyName("code"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Code { get; set; }
 
-    [JsonPropertyName("date_release"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("dateRelease"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? DateRelease { get; set; }
 
     [JsonPropertyName("name"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Name { get; set; }
 
-    [JsonPropertyName("octgn_id"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("octgnId"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? OctgnId { get; set; }
 
-    [JsonPropertyName("pack_type_code"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("packTypeCode"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? PackTypeCode { get; set; }
 
     [JsonPropertyName("position"), JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

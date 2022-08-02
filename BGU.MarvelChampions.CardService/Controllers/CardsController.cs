@@ -1,8 +1,9 @@
-using BGU.MarvelChampions.Models;
+using AutoMapper;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace BGU.MarvelChampions.CardService.Controllers;
@@ -13,17 +14,23 @@ public class CardsController : CardControllerBase
 {
     private readonly ILogger<CardsController> _logger;
 
-    public CardsController(ILogger<CardsController> logger, ICardService service)
-        : base (service)
+    public CardsController(ILogger<CardsController> logger, ICardService service, IMapper mapper)
+        : base(service, mapper)
     {
         _logger = logger;
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Card>> Get(string pack)
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> Get(string pack)
     {
         var cards = await _service.GetAllByPackAsync(pack);
-        await EnrichWithDuplicate(cards);
-        return cards;
+        if (cards == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(await EnrichData(cards));
     }
 }

@@ -1,3 +1,5 @@
+using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.PackService.Entities;
 using BGU.MarvelChampions.PackService.Services;
 using BGU.MarvelChampions.PackService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -20,6 +22,11 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddMemoryCache();
     builder.Services.AddSwaggerGen();
+
+    builder.Services.AddAutoMapper(cfg =>
+    {
+        cfg.CreateMap<PackEntity, Pack>();
+    });
 
     builder.Services.AddScoped<IPackService, PackService>();;
 
