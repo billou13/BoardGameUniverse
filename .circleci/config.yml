@@ -10,6 +10,9 @@ parameters:
   deploy-deckservice:
     type: boolean
     default: false
+  deploy-imageservice:
+    type: boolean
+    default: false
   deploy-packservice:
     type: boolean
     default: false
@@ -61,6 +64,12 @@ workflows:
       - build-n-push:
           docker-file: 'BGU.MarvelChampions.DeckService/Dockerfile'
           app-name: '$HEROKU_MC_DECKSERVICE'
+  deploy-bgu-mc-imageservice:
+    when: << pipeline.parameters.deploy-imageservice >>
+    jobs:
+      - build-n-push:
+          docker-file: 'BGU.MarvelChampions.ImageService/Dockerfile'
+          app-name: '$HEROKU_MC_IMAGESERVICE'
   deploy-bgu-mc-packservice:
     when: << pipeline.parameters.deploy-packservice >>
     jobs:

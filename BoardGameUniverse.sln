@@ -23,6 +23,10 @@ Project("{6AEF442E-E7B5-4FA2-A086-1951F3349042}") = "BGU.MarvelChampions.DeckSer
 EndProject
 Project("{422BA9E4-EA77-4872-8E15-F9385DFBAA54}") = "BGU.MarvelChampions.DeckService.Tests", "BGU.MarvelChampions.DeckService.Tests\BGU.MarvelChampions.DeckService.Tests.csproj", "{2EAB5B6D-22C1-4D5A-9EC2-292CFCEAB6EA}"
 EndProject
+Project("{0E4E463E-9053-402C-8548-5A19DCBC706E}") = "BGU.MarvelChampions.ImageService", "BGU.MarvelChampions.ImageService\BGU.MarvelChampions.ImageService.csproj", "{EC4B2921-C2D5-42D8-9CB8-E22897F6333F}"
+EndProject
+Project("{1B211EF1-6278-45F3-A928-225ACC38AA9F}") = "BGU.MarvelChampions.ImageService.Tests", "BGU.MarvelChampions.ImageService.Tests\BGU.MarvelChampions.ImageService.Tests.csproj", "{2D85FB45-F5F8-4757-8BE1-DD91E85907B1}"
+EndProject
 Project("{C3514DEB-F971-4F2F-91BE-B8C46428662A}") = "BGU.MarvelChampions.PackService", "BGU.MarvelChampions.PackService\BGU.MarvelChampions.PackService.csproj", "{C0E4CC1D-BB3A-47FC-9E30-E4E633E7E8B5}"
 EndProject
 Project("{87965C60-C970-4562-9BAA-A1CBED528984}") = "BGU.MarvelChampions.PackService.Tests", "BGU.MarvelChampions.PackService.Tests\BGU.MarvelChampions.PackService.Tests.csproj", "{30DAB527-2315-4556-A6EC-74CCF734F7C0}"
@@ -78,6 +82,14 @@ Global
 		{2EAB5B6D-22C1-4D5A-9EC2-292CFCEAB6EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EAB5B6D-22C1-4D5A-9EC2-292CFCEAB6EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EAB5B6D-22C1-4D5A-9EC2-292CFCEAB6EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4B2921-C2D5-42D8-9CB8-E22897F6333F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4B2921-C2D5-42D8-9CB8-E22897F6333F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4B2921-C2D5-42D8-9CB8-E22897F6333F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4B2921-C2D5-42D8-9CB8-E22897F6333F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D85FB45-F5F8-4757-8BE1-DD91E85907B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D85FB45-F5F8-4757-8BE1-DD91E85907B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D85FB45-F5F8-4757-8BE1-DD91E85907B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D85FB45-F5F8-4757-8BE1-DD91E85907B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0E4CC1D-BB3A-47FC-9E30-E4E633E7E8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0E4CC1D-BB3A-47FC-9E30-E4E633E7E8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0E4CC1D-BB3A-47FC-9E30-E4E633E7E8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU

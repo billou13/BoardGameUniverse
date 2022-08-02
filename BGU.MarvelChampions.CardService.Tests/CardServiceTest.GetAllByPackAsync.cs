@@ -10,8 +10,8 @@ public partial class CardServiceTest
     private SortedList<string, CardEntity> _packCards;
 
     [Theory]
-    [InlineData("core", 101, "01065")]
-    [InlineData("drs", 35, "09017")]
+    [InlineData("core", 203, "01065")]
+    [InlineData("drs", 40, "09017")]
     public async void GetAllByPack(string pack, int count, string existingCode)
     {
         var test = await WhenGettingAllByPackAsync(pack);
