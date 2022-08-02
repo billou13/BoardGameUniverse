@@ -11,4 +11,8 @@ public interface ICardService
     Task<SortedList<string, CardEntity>> GetAllAsync();
 
     Task<CardEntity?> GetAsync(string code);
+
+    Task<CardEntity?> GetPreviousAsync(string code);
+
+    Task<CardEntity?> GetNextAsync(string code);
 }

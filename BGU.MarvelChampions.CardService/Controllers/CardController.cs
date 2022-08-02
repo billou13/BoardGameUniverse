@@ -33,4 +33,34 @@ public class CardController : CardControllerBase
 
         return Ok(await EnrichData(card));
     }
+
+    [HttpGet]
+    [Route("previous")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> GetPrevious(string code)
+    {
+        var card = await _service.GetPreviousAsync(code);
+        if (card == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(await EnrichData(card));
+    }
+
+    [HttpGet]
+    [Route("next")]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    [SwaggerResponse((int)HttpStatusCode.NotFound)]
+    public async Task<IActionResult> GetNext(string code)
+    {
+        var card = await _service.GetNextAsync(code);
+        if (card == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(await EnrichData(card));
+    }
 }
