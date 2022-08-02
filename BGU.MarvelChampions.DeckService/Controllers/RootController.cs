@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace BGU.MarvelChampions.DeckService.Controllers;
 
 [ApiController]
+[Route("/")]
 public class RootController : ControllerBase
 {
-    [Route("/")]
-    public string Get()
+    [HttpGet]
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    public IActionResult Get()
     {
-        return "Marvel Champions Deck service started.";
+        return Ok("Marvel Champions Deck service started.");
     }
 }

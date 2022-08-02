@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,9 +6,13 @@ namespace BGU.MarvelChampions.CardService.Services.Interfaces;
 
 public interface ICardService
 {
-    Task<IEnumerable<Card>> GetAllByPackAsync(string pack);
+    Task<SortedList<string, CardEntity>> GetAllByPackAsync(string pack);
 
-    Task<SortedList<string, Card>> GetAllAsync();
+    Task<SortedList<string, CardEntity>> GetAllAsync();
 
-    Task<Card?> GetAsync(string code);
+    Task<CardEntity?> GetAsync(string code);
+
+    Task<CardEntity?> GetPreviousAsync(string code);
+
+    Task<CardEntity?> GetNextAsync(string code);
 }

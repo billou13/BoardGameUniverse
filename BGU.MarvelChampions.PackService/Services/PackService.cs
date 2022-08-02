@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.PackService.Entities;
 using BGU.MarvelChampions.PackService.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -21,15 +21,15 @@ public class PackService : IPackService
         _memoryCache = memoryCache;
     }
 
-    public async Task<SortedList<string, Pack>> GetAllAsync()
+    public async Task<SortedList<string, PackEntity>> GetAllAsync()
     {
         try
         {
             string cacheKey = "GetAllAsync";
-            if (!_memoryCache.TryGetValue<SortedList<string, Pack>>(cacheKey, out SortedList<string, Pack> packs))
+            if (!_memoryCache.TryGetValue<SortedList<string, PackEntity>>(cacheKey, out SortedList<string, PackEntity> packs))
             {
                 packs = await LoadAllAsync();
-                _memoryCache.Set<SortedList<string, Pack>>(cacheKey, packs);
+                _memoryCache.Set<SortedList<string, PackEntity>>(cacheKey, packs);
             }
 
             return packs;
@@ -41,7 +41,7 @@ public class PackService : IPackService
         }
     }
 
-    public async Task<Pack?> GetAsync(string code)
+    public async Task<PackEntity?> GetAsync(string code)
     {
         try
         {
@@ -55,13 +55,13 @@ public class PackService : IPackService
         }
     }
 
-    private async Task<SortedList<string, Pack>> LoadAllAsync()
+    private async Task<SortedList<string, PackEntity>> LoadAllAsync()
     {
-        var result = new SortedList<string, Pack>();
+        var result = new SortedList<string, PackEntity>();
         string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Json/packs.json");
         using (var stream = File.OpenRead(path))
         {
-            var packs = await JsonSerializer.DeserializeAsync<Pack[]>(stream);
+            var packs = await JsonSerializer.DeserializeAsync<PackEntity[]>(stream);
             if (packs != null)
             foreach (var pack in packs)
             {

@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.PackService.Entities;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -6,7 +6,7 @@ namespace BGU.MarvelChampions.PackService.Tests;
 
 public partial class PackServiceTest
 {
-    private Pack? _pack;
+    private PackEntity? _pack;
 
     [Theory]
     [InlineData("drs", "2020-06-06", "Doctor Strange", "08cf8438-8367-43e7-8443-46836f7974e4", "hero", 56)]

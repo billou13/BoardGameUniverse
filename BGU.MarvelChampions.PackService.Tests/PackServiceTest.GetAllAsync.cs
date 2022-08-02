@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.PackService.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -7,7 +7,7 @@ namespace BGU.MarvelChampions.PackService.Tests;
 
 public partial class PackServiceTest
 {
-    private SortedList<string, Pack> _packs;
+    private SortedList<string, PackEntity> _packs;
 
     [Theory]
     [InlineData(32, "drs")]

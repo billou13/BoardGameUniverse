@@ -1,3 +1,5 @@
+using AutoMapper;
+using BGU.MarvelChampions.CardService.Entities;
 using BGU.MarvelChampions.CardService.Extensions;
 using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
@@ -10,33 +12,49 @@ namespace BGU.MarvelChampions.CardService.Controllers;
 public abstract class CardControllerBase : ControllerBase
 {
     protected readonly ICardService _service;
+    protected readonly IMapper _mapper;
 
-    public CardControllerBase(ICardService service)
+    public CardControllerBase(ICardService service, IMapper mapper)
     {
         _service = service;
+        _mapper = mapper;
     }
 
-    protected async Task EnrichWithDuplicate(Card? card)
+    protected async Task<Card?> EnrichData(CardEntity? card)
     {
-        if (card?.DuplicateOf == null)
+        if (card == null)
         {
-            return;
+            return null;
         }
 
-        var baseCard = await _service.GetAsync(card.DuplicateOf);
-        if (baseCard == null)
+        if (card?.DuplicateOf != null)
         {
-            return;
+            var originalCard = await _service.GetAsync(card.DuplicateOf);
+            card.MergeWith(originalCard);
         }
 
-        card.MergeWith(baseCard);
+        return _mapper.Map<Card>(card);
     }
 
-    protected async Task EnrichWithDuplicate(IEnumerable<Card> cards)
+    protected async Task<IEnumerable<Card>> EnrichData(SortedList<string, CardEntity> cards)
     {
+        if (cards == null)
+        {
+            return null;
+        }
+
+        var items = new List<Card>();
         foreach (var card in cards)
         {
-            await EnrichWithDuplicate(card);
+            var item = await EnrichData(card.Value);
+            if (item == null)
+            {
+                continue;
+            }
+
+            items.Add(item);
         }
+
+        return items;
     }
 }

@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -6,7 +6,7 @@ namespace BGU.MarvelChampions.CardService.Tests;
 
 public partial class CardServiceTest
 {
-    private Card? _card;
+    private CardEntity? _card;
 
     [Fact]
     public async void GetMissing()

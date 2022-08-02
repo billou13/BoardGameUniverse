@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.Database.Postgres.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,15 +7,15 @@ namespace BGU.MarvelChampions.DeckService.Services.Interfaces;
 
 public interface IDeckService
 {
-    Task<IEnumerable<Deck>> GetAllAsync();
+    Task<IEnumerable<DeckEntity>> GetAllAsync();
 
-    Task<Deck?> GetAsync(Guid guid);
+    Task<DeckEntity?> GetAsync(Guid guid);
 
-    Task<Guid?> CreateAsync(Deck deck);
+    Task<Guid?> CreateAsync(DeckEntity deck);
 
-    Task<bool> AddCard(DeckCard item);
+    Task<bool> AddCard(Guid deckGuid, string cardCode);
 
-    Task<bool> RemoveCard(DeckCard item);
+    Task<bool> RemoveCard(Guid deckGuid, string cardCode);
 
     Task<IEnumerable<string>> GetAllCards(Guid deckGuid);
 }

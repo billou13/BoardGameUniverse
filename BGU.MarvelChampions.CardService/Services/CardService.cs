@@ -1,4 +1,4 @@
-using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.CardService.Entities;
 using BGU.MarvelChampions.CardService.Services.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -21,15 +21,20 @@ public class CardService : ICardService
         _memoryCache = memoryCache;
     }
 
-    public async Task<IEnumerable<Card>> GetAllByPackAsync(string pack)
+    public async Task<SortedList<string, CardEntity>> GetAllByPackAsync(string pack)
     {
         try
         {
             string cacheKey = $"GetAllByPackAsync_{pack}";
-            if (!_memoryCache.TryGetValue<IEnumerable<Card>>(cacheKey, out IEnumerable<Card> cards))
+            if (!_memoryCache.TryGetValue<SortedList<string, CardEntity>>(cacheKey, out SortedList<string, CardEntity> cards))
             {
-                cards = await LoadAllByPackAsync(pack);
-                _memoryCache.Set<IEnumerable<Card>>(cacheKey, cards);
+                cards = await LoadPackAsync(pack);
+                if (cards == null)
+                {
+                    return null;
+                }
+
+                _memoryCache.Set<SortedList<string, CardEntity>>(cacheKey, cards);
             }
 
             return cards;
@@ -41,15 +46,15 @@ public class CardService : ICardService
         }
     }
 
-    public async Task<SortedList<string, Card>> GetAllAsync()
+    public async Task<SortedList<string, CardEntity>> GetAllAsync()
     {
         try
         {
             string cacheKey = "GetAllAsync";
-            if (!_memoryCache.TryGetValue<SortedList<string, Card>>(cacheKey, out SortedList<string, Card> cards))
+            if (!_memoryCache.TryGetValue<SortedList<string, CardEntity>>(cacheKey, out SortedList<string, CardEntity> cards))
             {
-                cards = await LoadAllAsync();
-                _memoryCache.Set<SortedList<string, Card>>(cacheKey, cards);
+                cards = await LoadAllFilesAsync();
+                _memoryCache.Set<SortedList<string, CardEntity>>(cacheKey, cards);
             }
 
             return cards;
@@ -61,7 +66,7 @@ public class CardService : ICardService
         }
     }
 
-    public async Task<Card?> GetAsync(string code)
+    public async Task<CardEntity?> GetAsync(string code)
     {
         try
         {
@@ -75,34 +80,64 @@ public class CardService : ICardService
         }
     }
 
-    private async Task<IEnumerable<Card>> LoadAllByPackAsync(string pack)
+    public async Task<CardEntity?> GetPreviousAsync(string code)
     {
-        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Json/{pack}.json");
-        using (var stream = File.OpenRead(path))
+        try
         {
-            var cards = await JsonSerializer.DeserializeAsync<Card[]>(stream);
-            return cards != null ? cards : new Card[] {};
+            var cards = await GetAllAsync();
+            if (!cards.ContainsKey(code))
+            {
+                return null;
+            }
+
+            int index = cards.IndexOfKey(code);
+            return index > 0 ? cards.Values[index - 1] : null;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while asynchronously getting previous card by code '{code}'.");
+            throw;
         }
     }
 
-    private async Task<SortedList<string, Card>> LoadAllAsync()
+    public async Task<CardEntity?> GetNextAsync(string code)
     {
-        var result = new SortedList<string, Card>();
-        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json");
-        foreach (var file in Directory.EnumerateFiles(path, "*.json"))
+        try
         {
-            var cards = await GetAllByPackAsync(Path.GetFileNameWithoutExtension(file));
+            var cards = await GetAllAsync();
+            if (!cards.ContainsKey(code))
+            {
+                return null;
+            }
+
+            int index = cards.IndexOfKey(code);
+            return index < cards.Count - 1 ? cards.Values[index + 1] : null;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while asynchronously getting next card by code '{code}'.");
+            throw;
+        }
+    }
+
+    private async Task<SortedList<string, CardEntity>> LoadFileAsync(string fileName)
+    {
+        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"Json/{fileName}");
+        if (!File.Exists(path))
+        {
+            return null;
+        }
+
+        var result = new SortedList<string, CardEntity>();
+        using (var stream = File.OpenRead(path))
+        {
+            var cards = await JsonSerializer.DeserializeAsync<IEnumerable<CardEntity>>(stream);
             if (cards != null)
             foreach (var card in cards)
             {
                 if (string.IsNullOrEmpty(card.Code))
                 {
-                    throw new InvalidDataException($"A card without code exists in the '{file}' file.");
-                }
-
-                if (result.ContainsKey(card.Code))
-                {
-                    continue;
+                    throw new InvalidDataException($"A card without code exists in the '{fileName}' file.");
                 }
 
                 result.Add(card.Code, card);
@@ -110,5 +145,46 @@ public class CardService : ICardService
         }
 
         return result;
+    }
+
+    private async Task<SortedList<string, CardEntity>> LoadPackAsync(string pack)
+    {
+        var cards = await LoadFileAsync($"{pack}.json");
+        if (cards == null)
+        {
+            return null;
+        }
+
+        var items = new SortedList<string, CardEntity>();
+        foreach (var card in cards)
+        {
+            items.Add(card.Key, card.Value);
+        }
+
+        var encounterCards = await LoadFileAsync($"{pack}_encounter.json");
+        if (encounterCards != null)
+        foreach (var encounterCard in encounterCards)
+        {
+            items.Add(encounterCard.Key, encounterCard.Value);
+        }
+
+        return items;
+    }
+
+    private async Task<SortedList<string, CardEntity>> LoadAllFilesAsync()
+    {
+        var items = new SortedList<string, CardEntity>();
+        string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Json");
+        foreach (var file in Directory.EnumerateFiles(path, "*.json"))
+        {
+            var cards = await LoadFileAsync(Path.GetFileName(file));
+            if (cards != null)
+            foreach (var card in cards)
+            {
+                items.Add(card.Key, card.Value);
+            }
+        }
+
+        return items;
     }
 }

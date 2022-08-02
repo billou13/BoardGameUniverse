@@ -1,8 +1,11 @@
+using AutoMapper;
 using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace BGU.MarvelChampions.DeckService.Controllers;
@@ -13,16 +16,20 @@ public class DecksController : ControllerBase
 {
     private readonly ILogger<DecksController> _logger;
     private readonly IDeckService _service;
+    private readonly IMapper _mapper;
 
-    public DecksController(ILogger<DecksController> logger, IDeckService service)
+    public DecksController(ILogger<DecksController> logger, IDeckService service, IMapper mapper)
     {
         _logger = logger;
         _service = service;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<IEnumerable<Deck>> Get()
+    [SwaggerResponse((int)HttpStatusCode.OK)]
+    public async Task<IActionResult> Get()
     {
-        return await _service.GetAllAsync();
+        var decks = await _service.GetAllAsync();
+        return Ok(_mapper.Map<IEnumerable<Deck>>(decks));
     }
 }
