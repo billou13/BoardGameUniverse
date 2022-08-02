@@ -1,0 +1,142 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/card",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-cardservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/card",
+            "UpstreamHttpMethod": [ "Get" ]
+        },
+        {
+            "DownstreamPathTemplate": "/card{url}",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-cardservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/card{url}",
+            "UpstreamHttpMethod": [ "Get" ]
+        },
+        {
+            "DownstreamPathTemplate": "/cards",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-cardservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/cards",
+            "UpstreamHttpMethod": [ "Get" ]
+        },
+        {
+            "DownstreamPathTemplate": "/deck",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-deckservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/deck",
+            "UpstreamHttpMethod": [ "Get", "Post", "Delete" ]
+        },
+        {
+            "DownstreamPathTemplate": "/deck/cards",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-deckservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/deck/cards",
+            "UpstreamHttpMethod": [ "Get", "Post", "Delete" ]
+        },
+        {
+            "DownstreamPathTemplate": "/decks",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-deckservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/decks",
+            "UpstreamHttpMethod": [ "Get" ]
+        },
+        {
+            "DownstreamPathTemplate": "/redis/{url}",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-deckservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/redis/{url}",
+            "UpstreamHttpMethod": [ "Get", "Delete" ]
+        },
+        {
+            "DownstreamPathTemplate": "/pack",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-packservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/pack",
+            "UpstreamHttpMethod": [ "Get" ]
+        },
+        {
+            "DownstreamPathTemplate": "/packs",
+            "DownstreamScheme": "https",
+            "DownstreamHeaderTransform": {
+                "Access-Control-Allow-Origin": "*"
+            },
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "bgu-mc-packservice.herokuapp.com",
+                    "Port": 443
+                }
+            ],
+            "UpstreamPathTemplate": "/packs",
+            "UpstreamHttpMethod": [ "Get" ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:7500"
+    }
+}

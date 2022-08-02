@@ -58,7 +58,7 @@ export class Cards extends Component {
   }
 
   async getAllCards(pack) {
-    const response = await fetch(`marvelchampions/cards?pack=${pack}`)
+    const response = await fetch(`${window.API_GATEWAY_URL}/cards?pack=${pack}`)
     const data = await response.json()
     this.setState({ cards: data })
   }

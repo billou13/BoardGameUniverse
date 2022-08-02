@@ -149,13 +149,10 @@ public class CardService : ICardService
 
     private async Task<SortedList<string, CardEntity>> LoadPackAsync(string pack)
     {
-        var cards = await LoadFileAsync($"{pack}.json");
-        if (cards == null)
-        {
-            return null;
-        }
-
         var items = new SortedList<string, CardEntity>();
+
+        var cards = await LoadFileAsync($"{pack}.json");
+        if (cards != null)
         foreach (var card in cards)
         {
             items.Add(card.Key, card.Value);
@@ -168,7 +165,7 @@ public class CardService : ICardService
             items.Add(encounterCard.Key, encounterCard.Value);
         }
 
-        return items;
+        return items.Count > 0 ? items : null;
     }
 
     private async Task<SortedList<string, CardEntity>> LoadAllFilesAsync()

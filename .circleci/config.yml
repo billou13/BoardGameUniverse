@@ -1,6 +1,9 @@
 version: 2.1
 
 parameters:
+  deploy-apigateway:
+    type: boolean
+    default: false
   deploy-cardservice:
     type: boolean
     default: false
@@ -40,6 +43,12 @@ jobs:
           heroku container:release web -a << parameters.app-name >>    
 
 workflows:
+  deploy-bgu-mc-apigateway:
+    when: << pipeline.parameters.deploy-apigateway >>
+    jobs:
+      - build-n-push:
+          docker-file: 'BGU.MarvelChampions.ApiGateway/Dockerfile'
+          app-name: '$HEROKU_MC_APIGATEWAY'
   deploy-bgu-mc-cardservice:
     when: << pipeline.parameters.deploy-cardservice >>
     jobs:

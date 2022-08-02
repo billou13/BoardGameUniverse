@@ -13,6 +13,8 @@ Project("{83526677-F0C1-4A9D-910F-B04ABFC2CA15}") = "BGU.Database.Redis.Tests", 
 EndProject
 Project("{F0DE6369-4640-4D4E-B770-71D2DDEAC6AC}") = "BGU.MarvelChampions", "BGU.MarvelChampions\BGU.MarvelChampions.csproj", "{B737BB14-A389-422D-8624-653EE6541C78}"
 EndProject
+Project("{D18DE1DF-BF79-45D6-B307-2CEC766CCE42}") = "BGU.MarvelChampions.ApiGateway", "BGU.MarvelChampions.ApiGateway\BGU.MarvelChampions.ApiGateway.csproj", "{CCC01ADE-E625-48A9-AAE7-03F227E77111}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGU.MarvelChampions.CardService", "BGU.MarvelChampions.CardService\BGU.MarvelChampions.CardService.csproj", "{246292F8-C672-413F-97BA-6AD8C2E4ADAB}"
 EndProject
 Project("{6F309839-A5AD-4B4E-AE2D-A3C8ADD5F26C}") = "BGU.MarvelChampions.CardService.Tests", "BGU.MarvelChampions.CardService.Tests\BGU.MarvelChampions.CardService.Tests.csproj", "{F313F6E5-16D9-4BA5-BE7E-A0EA20272F68}"
@@ -56,6 +58,10 @@ Global
 		{B737BB14-A389-422D-8624-653EE6541C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B737BB14-A389-422D-8624-653EE6541C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B737BB14-A389-422D-8624-653EE6541C78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCC01ADE-E625-48A9-AAE7-03F227E77111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC01ADE-E625-48A9-AAE7-03F227E77111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCC01ADE-E625-48A9-AAE7-03F227E77111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC01ADE-E625-48A9-AAE7-03F227E77111}.Release|Any CPU.Build.0 = Release|Any CPU
 		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{246292F8-C672-413F-97BA-6AD8C2E4ADAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
