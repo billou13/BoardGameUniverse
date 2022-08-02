@@ -10,7 +10,6 @@ try
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
-    builder.Services.AddHttpClient();
 
     // NLog: Setup NLog for Dependency injection
     builder.Logging.ClearProviders();

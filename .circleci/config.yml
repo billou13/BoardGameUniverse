@@ -1,6 +1,12 @@
 version: 2.1
 
 parameters:
+  deploy-all:
+    type: boolean
+    default: false
+  deploy-microservices:
+    type: boolean
+    default: false
   deploy-apigateway:
     type: boolean
     default: false
@@ -47,37 +53,43 @@ jobs:
 
 workflows:
   deploy-bgu-mc-apigateway:
-    when: << pipeline.parameters.deploy-apigateway >>
+    when:
+      or: [ << pipeline.parameters.deploy-all >>, << pipeline.parameters.deploy-apigateway >> ]
     jobs:
       - build-n-push:
           docker-file: 'BGU.MarvelChampions.ApiGateway/Dockerfile'
           app-name: '$HEROKU_MC_APIGATEWAY'
   deploy-bgu-mc-cardservice:
-    when: << pipeline.parameters.deploy-cardservice >>
+    when:
+      or: [ << pipeline.parameters.deploy-all >>, << pipeline.parameters.deploy-microservices >>, << pipeline.parameters.deploy-cardservice >> ]
     jobs:
       - build-n-push:
           docker-file: 'BGU.MarvelChampions.CardService/Dockerfile'
           app-name: '$HEROKU_MC_CARDSERVICE'
   deploy-bgu-mc-deckservice:
-    when: << pipeline.parameters.deploy-deckservice >>
+    when:
+      or: [ << pipeline.parameters.deploy-all >>, << pipeline.parameters.deploy-microservices >>, << pipeline.parameters.deploy-deckservice >> ]
     jobs:
       - build-n-push:
           docker-file: 'BGU.MarvelChampions.DeckService/Dockerfile'
           app-name: '$HEROKU_MC_DECKSERVICE'
   deploy-bgu-mc-imageservice:
-    when: << pipeline.parameters.deploy-imageservice >>
+    when:
+      or: [ << pipeline.parameters.deploy-all >>, << pipeline.parameters.deploy-microservices >>, << pipeline.parameters.deploy-imageservice >> ]
     jobs:
       - build-n-push:
           docker-file: 'BGU.MarvelChampions.ImageService/Dockerfile'
           app-name: '$HEROKU_MC_IMAGESERVICE'
   deploy-bgu-mc-packservice:
-    when: << pipeline.parameters.deploy-packservice >>
+    when:
+      or: [ << pipeline.parameters.deploy-all >>, << pipeline.parameters.deploy-microservices >>, << pipeline.parameters.deploy-packservice >> ]
     jobs:
       - build-n-push:
           docker-file: 'BGU.MarvelChampions.PackService/Dockerfile'
           app-name: '$HEROKU_MC_PACKSERVICE'
   deploy-bgu-webapp:
-    when: << pipeline.parameters.deploy-webapp >>
+    when:
+      or: [ << pipeline.parameters.deploy-all >>, << pipeline.parameters.deploy-webapp >> ]
     jobs:
       - build-n-push:
           docker-file: 'BoardGameUniverse.WebApp/Dockerfile'
