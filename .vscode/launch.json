@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (apigateway)",
+            "name": "Launch API Gateway",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-apigateway",
@@ -22,7 +22,7 @@
             }
         },
         {
-            "name": ".NET Core Launch (cardservice)",
+            "name": "Launch Card API service",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-cardservice",
@@ -42,7 +42,7 @@
             }
         },
         {
-            "name": ".NET Core Launch (deckservice)",
+            "name": "Launch Deck API service",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-deckservice",
@@ -63,7 +63,7 @@
             }
         },
         {
-            "name": ".NET Core Launch (imageservice)",
+            "name": "Launch Image API service",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-imageservice",
@@ -84,7 +84,7 @@
             }
         },
         {
-            "name": ".NET Core Launch (packservice)",
+            "name": "Launch Pack API service",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-packservice",
@@ -107,7 +107,7 @@
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes
             // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-            "name": ".NET Core Launch (webapp)",
+            "name": "Launch BGU webapp",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build-webapp",

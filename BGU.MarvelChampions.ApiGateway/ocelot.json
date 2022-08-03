@@ -4,7 +4,9 @@
             "DownstreamPathTemplate": "/card",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -19,7 +21,9 @@
             "DownstreamPathTemplate": "/card{url}",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -34,7 +38,9 @@
             "DownstreamPathTemplate": "/cards",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -49,7 +55,9 @@
             "DownstreamPathTemplate": "/deck",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -64,7 +72,9 @@
             "DownstreamPathTemplate": "/deck/cards",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -79,7 +89,9 @@
             "DownstreamPathTemplate": "/decks",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -94,7 +106,9 @@
             "DownstreamPathTemplate": "/redis/{url}",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -109,7 +123,9 @@
             "DownstreamPathTemplate": "/image/{url}",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -124,7 +140,9 @@
             "DownstreamPathTemplate": "/pack",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -139,7 +157,9 @@
             "DownstreamPathTemplate": "/packs",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
-                "Access-Control-Allow-Origin": "*"
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "*",
+                "Access-Control-Allow-Headers": "*"
             },
             "DownstreamHostAndPorts": [
                 {
@@ -152,6 +172,6 @@
         }
     ],
     "GlobalConfiguration": {
-        "BaseUrl": "https://localhost:7500"
+        "BaseUrl": "https://bgu-mc-apigateway.herokuapp.com"
     }
 }
