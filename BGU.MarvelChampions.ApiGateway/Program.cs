@@ -18,22 +18,22 @@ try
 
     builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
 
+    builder.Services.AddCors(options =>
+    {
+        // var origins = builder.Configuration.GetSection("EnableCorsOrigins").Get<string[]>();
+        // AllowCredentials to add later when specifying origins
+        options.AddPolicy(
+            "CorsPolicy",
+            policy => policy.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
+    });
+
     // Add services to the container.
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
     builder.Services.AddOcelot(builder.Configuration);
-
-    builder.Services.AddCors(options =>
-    {
-        var origins = builder.Configuration.GetSection("EnableCorsOrigins").Get<string[]>();
-        options.AddPolicy(
-            "CorsPolicy",
-            policy => policy.WithOrigins(origins)
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials());
-    });
 
     var app = builder.Build();
 
@@ -47,11 +47,13 @@ try
 
     app.UseHttpsRedirection();
 
-    app.UseAuthorization();
+    // https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
+    app.UseCors("CorsPolicy");
 
+    // https://ocelot.readthedocs.io/en/latest/index.html
     app.UseOcelot().Wait();
 
-    app.UseCors("CorsPolicy");
+    app.UseAuthorization();
 
     app.MapControllers();
 
