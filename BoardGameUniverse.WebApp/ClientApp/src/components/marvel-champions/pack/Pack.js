@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { CardRow } from './CardRow';
+import { PackCardRow } from './PackCardRow';
 
-export class Cards extends Component {
-  static displayName = Cards.name;
+export class Pack extends Component {
+  static displayName = Pack.name;
 
   constructor(props) {
     super(props);
@@ -10,8 +10,8 @@ export class Cards extends Component {
   }
 
   componentDidMount() {
-    const { pack } = this.props
-    this.getAllCards(pack);
+    const { code } = this.props
+    this.getAllCards(code);
   }
 
   static renderAllCards(cards) {
@@ -32,7 +32,7 @@ export class Cards extends Component {
             </tr>
           </thead>
           <tbody>
-            {cards.map((card) => <CardRow key={`card-${card.code}`} { ...card } />)}
+            {cards.map((card) => <PackCardRow key={`card-${card.code}`} { ...card } />)}
           </tbody>
         </table>
       </div>
@@ -40,25 +40,22 @@ export class Cards extends Component {
   }
 
   render() {
-    const { pack } = this.props
-
     let contents = (this.state.cards === null)
       ? <p><em>Loading...</em></p>
-      : Cards.renderAllCards(this.state.cards);
+      : Pack.renderAllCards(this.state.cards);
 
     return (
       <div>
         <h1 id="tabelLabel" >Marvel Champions cards</h1>
         <div className="mc-card">
-            <p>pack: {pack}</p>
             {contents}
         </div>
       </div>
     );
   }
 
-  async getAllCards(pack) {
-    const response = await fetch(`${window.API_GATEWAY_URL}/cards?pack=${pack}`)
+  async getAllCards(code) {
+    const response = await fetch(`${window.API_GATEWAY_URL}/cards/pack?code=${code}`)
     const data = await response.json()
     this.setState({ cards: data })
   }

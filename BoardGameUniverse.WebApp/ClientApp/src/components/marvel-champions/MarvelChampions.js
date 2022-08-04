@@ -16,7 +16,7 @@ export class MarvelChampions extends Component {
   static renderAllPacks(packs) {
     return (
       <ol>
-        {packs.map((pack) => <li key={`link-${pack.code}`}><Link to={`/marvel-champions/cards/${pack.code}`}>{pack.name}</Link></li>)}
+        {packs.map((pack) => <li key={`link-${pack.code}`}><Link to={`/marvel-champions/pack/${pack.code}`}>{pack.name}</Link></li>)}
       </ol>
     );
   }

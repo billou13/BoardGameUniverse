@@ -36,7 +36,7 @@ public abstract class CardControllerBase : ControllerBase
         return _mapper.Map<Card>(card);
     }
 
-    protected async Task<IEnumerable<Card>> EnrichData(SortedList<string, CardEntity> cards)
+    protected async Task<IEnumerable<Card>> EnrichData(IEnumerable<CardEntity> cards)
     {
         if (cards == null)
         {
@@ -46,7 +46,7 @@ public abstract class CardControllerBase : ControllerBase
         var items = new List<Card>();
         foreach (var card in cards)
         {
-            var item = await EnrichData(card.Value);
+            var item = await EnrichData(card);
             if (item == null)
             {
                 continue;
@@ -56,5 +56,15 @@ public abstract class CardControllerBase : ControllerBase
         }
 
         return items;
+    }
+
+    protected async Task<IEnumerable<Card>> EnrichData(SortedList<string, CardEntity> cards)
+    {
+        if (cards == null)
+        {
+            return null;
+        }
+
+        return await EnrichData(cards.Values);
     }
 }

@@ -159,4 +159,20 @@ export class Deck extends Component {
 
     this.setState({ addCode: '', cardCodes: newCardCodes });
   }
+
+  splitCardsByFactionCode(cards) {
+    let splitCards = {};
+    cards.forEach(card => {
+      if (!Object.hasOwn(splitCards, card.FactionCode)) {
+        splitCards[card.FactionCode] = {
+          name: card.FactionCode,
+          cards: []
+        };
+      }
+
+      splitCards[card.FactionCode].cards.push(card);
+    });
+
+    return splitCards;
+  }
 }

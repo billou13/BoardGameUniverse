@@ -35,7 +35,7 @@
             "UpstreamHttpMethod": [ "Get" ]
         },
         {
-            "DownstreamPathTemplate": "/cards",
+            "DownstreamPathTemplate": "/cards{url}",
             "DownstreamScheme": "https",
             "DownstreamHeaderTransform": {
                 "Access-Control-Allow-Origin": "*",
@@ -48,7 +48,7 @@
                     "Port": 443
                 }
             ],
-            "UpstreamPathTemplate": "/cards",
+            "UpstreamPathTemplate": "/cards{url}",
             "UpstreamHttpMethod": [ "Get" ]
         },
         {

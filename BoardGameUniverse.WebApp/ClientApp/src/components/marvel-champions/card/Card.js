@@ -26,7 +26,7 @@ export class Card extends Component {
   }
 
   static createPackNavLink(pack) {
-    return Card.createNavLink(`/marvel-champions/cards/${pack.code}`, pack.name);
+    return Card.createNavLink(`/marvel-champions/pack/${pack.code}`, pack.name);
   }
 
   static renderCard(card) {
@@ -46,7 +46,7 @@ export class Card extends Component {
             <p className="card-text text-capitalize fw-bold">{card.typeCode}<br />{card.traits}</p>
             {attributes.map((attribute) => <p className='card-text m-0 fs-6'>{attribute}</p>)}
             <p className="card-text border-primary border-start mt-3 ps-2" dangerouslySetInnerHTML={{__html: card.text}} />
-            <p className="card-text text-secondary fst-italic"><Link to={`/marvel-champions/cards/${card.packCode}`}>#{card.packCode}</Link></p>
+            <p className="card-text text-secondary fst-italic"><Link to={`/marvel-champions/pack/${card.packCode}`}>#{card.packCode}</Link></p>
             {card.backLink ? (<Link to={`/marvel-champions/card/${card.backLink}`}>Back</Link>) : ''}
           </div>
         </div>
