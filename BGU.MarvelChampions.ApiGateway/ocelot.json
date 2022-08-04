@@ -49,7 +49,7 @@
                 }
             ],
             "UpstreamPathTemplate": "/cards{url}",
-            "UpstreamHttpMethod": [ "Get" ]
+            "UpstreamHttpMethod": [ "Get", "Post" ]
         },
         {
             "DownstreamPathTemplate": "/deck",
