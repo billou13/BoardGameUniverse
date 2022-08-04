@@ -16,3 +16,7 @@ code {
 .mc-deck-card > img {
   border-radius: 1rem;
 }
+
+.w-20 {
+  width: 20% !important;
+}

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Button, Form, Input, InputGroup } from 'reactstrap';
+import { DeckCardsColumn } from './DeckCardsColumn';
 
 export class Deck extends Component {
   static displayName = Deck.name;
 
   constructor(props) {
     super(props);
-    this.state = { deck: null, cardCodes: [], addCode: '', removeCode: '' };
+    this.state = { deck: null, cards: null, addCode: '', removeCode: '' };
   }
 
   componentDidMount() {
@@ -17,36 +18,16 @@ export class Deck extends Component {
     }
   }
 
-  static renderDeckCardsColumn(title, cardCodes) {
-    let zIndex = 500;
-    let top = 2;
-    
-    return (
-      <div className='position-relative w-25'>
-        <div>{title}</div>
-        {cardCodes.map((cardCode) => {
-          let style = {
-            left: 0,
-            top: top + 'rem',
-            zIndex: zIndex++
-          };
-
-          top = top + 3.5;
-
-          return (
-            <div key={`card-${cardCode}`} className='mc-deck-card position-absolute' style={style}>
-              <img src={`${window.API_GATEWAY_URL}/image/card?code=${cardCode}`} className='img-fluid' />
-            </div>
-          );
-        })}
-      </div>
-    );
+  static renderDeckCardsColumns(cards) {
+    let splitCards = Deck.splitCardsByFactionCode(cards);
+    let factionCodes = Object.keys(splitCards);
+    return factionCodes.map((factionCode) => <DeckCardsColumn title={factionCode} cards={splitCards[factionCode].cards} />);
   }
 
   render() {
-    let content = (this.state.cardCodes === null)
+    let content = (this.state.cards === null)
       ? <p><em>Loading...</em></p>
-      : Deck.renderDeckCardsColumn('Cards', this.state.cardCodes);
+      : Deck.renderDeckCardsColumns(this.state.cards);
 
     return (
       <div>
@@ -100,7 +81,7 @@ export class Deck extends Component {
   async getAllCards(guid) {
     const response = await fetch(`${window.API_GATEWAY_URL}/deck/cards?guid=${guid}`);
     const data = await response.json();
-    this.setState({ cardCodes: data });
+    this.setState({ cards: data });
   }
 
   async addCard(code) {
@@ -120,13 +101,16 @@ export class Deck extends Component {
       body: json
     };
 
-    const response = await fetch(`${window.API_GATEWAY_URL}/deck/cards`, options);
-    if (response.status !== 200) {
+    const responseAddCard = await fetch(`${window.API_GATEWAY_URL}/deck/cards`, options);
+    if (responseAddCard.status !== 200) {
       return;
     }
 
-    let newCardCodes = [...this.state.cardCodes, code];
-    this.setState({ addCode: '', cardCodes: newCardCodes });
+    const responseCardDetail = await fetch(`${window.API_GATEWAY_URL}/card?code=${code}`);
+    const card = await responseCardDetail.json()
+
+    let newCards = [...this.state.cards, card];
+    this.setState({ addCode: '', cards: newCards });
   }
 
   async removeCard(code) {
@@ -151,26 +135,26 @@ export class Deck extends Component {
       return;
     }
 
-    let newCardCodes = [...this.state.cardCodes];
-    let index = newCardCodes.indexOf(code);
+    let newCards = [...this.state.cards];
+    let index = newCards.map((c) => c.code).indexOf(code);
     if (index >= 0) {
-      newCardCodes.splice(index, 1);
+      newCards.splice(index, 1);
     }
 
-    this.setState({ addCode: '', cardCodes: newCardCodes });
+    this.setState({ removeCode: '', cards: newCards });
   }
 
-  splitCardsByFactionCode(cards) {
+  static splitCardsByFactionCode(cards) {
     let splitCards = {};
     cards.forEach(card => {
-      if (!Object.hasOwn(splitCards, card.FactionCode)) {
-        splitCards[card.FactionCode] = {
-          name: card.FactionCode,
+      if (!Object.hasOwn(splitCards, card.factionCode)) {
+        splitCards[card.factionCode] = {
+          name: card.factionCode,
           cards: []
         };
       }
 
-      splitCards[card.FactionCode].cards.push(card);
+      splitCards[card.factionCode].cards.push(card);
     });
 
     return splitCards;

@@ -6,31 +6,49 @@ export class MarvelChampions extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { packs: null };
+    this.state = { packs: null, decks: null };
   }
 
   componentDidMount() {
     this.getAllPacks();
+    this.getAllDecks();
   }
 
   static renderAllPacks(packs) {
     return (
-      <ol>
-        {packs.map((pack) => <li key={`link-${pack.code}`}><Link to={`/marvel-champions/pack/${pack.code}`}>{pack.name}</Link></li>)}
-      </ol>
+      <div>
+        <ol>
+          {packs.map((pack) => <li key={`pack-${pack.code}`}><Link to={`/marvel-champions/pack/${pack.code}`}>{pack.name}</Link></li>)}
+        </ol>
+      </div>
+    );
+  }
+
+  static renderAllDecks(decks) {
+    return (
+      <div>
+        <ul>
+          {decks.map((deck) => <li key={`deck-${deck.guid}`}><Link to={`/marvel-champions/deck/${deck.guid}`}>{deck.name}</Link></li>)}
+        </ul>
+      </div>
     );
   }
 
   render() {
-    let contents = (this.state.packs === null)
+    let packsContent = (this.state.packs === null)
       ? <p><em>Loading...</em></p>
       : MarvelChampions.renderAllPacks(this.state.packs);
+
+    let decksContent = (this.state.decks === null)
+      ? ''
+      : MarvelChampions.renderAllDecks(this.state.decks);
 
     return (
       <div>
         <h1 id="tabelLabel" >Marvel Champions</h1>
-        <div className="mc-card">
-            {contents}
+        <div className='d-flex justify-content-around'>
+            {packsContent}
+            {decksContent}
         </div>
       </div>
     );
@@ -40,5 +58,11 @@ export class MarvelChampions extends Component {
     const response = await fetch(`${window.API_GATEWAY_URL}/packs`)
     const data = await response.json()
     this.setState({ packs: data })
+  }
+
+  async getAllDecks() {
+    const response = await fetch(`${window.API_GATEWAY_URL}/decks`)
+    const data = await response.json()
+    this.setState({ decks: data })
   }
 }
