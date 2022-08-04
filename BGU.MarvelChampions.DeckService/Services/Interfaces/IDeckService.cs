@@ -1,4 +1,5 @@
 using BGU.Database.Postgres.Entities;
+using BGU.MarvelChampions.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,5 +18,5 @@ public interface IDeckService
 
     Task<bool> RemoveCard(Guid deckGuid, string cardCode);
 
-    Task<IEnumerable<string>> GetAllCards(Guid deckGuid);
+    Task<IEnumerable<Card>> GetAllCards(Guid deckGuid);
 }

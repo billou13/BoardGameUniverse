@@ -1,5 +1,6 @@
 ﻿using BGU.Database.Postgres;
 using BGU.Database.Redis;
+using BGU.MarvelChampions.Services;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -17,6 +18,7 @@ public partial class DeckServiceTest
         var logger = Substitute.For<ILogger<Services.DeckService>>();
         var dbContext = Substitute.For<DeckDbContext>();
         var redisSetDal = Substitute.For<RedisSetDal>();
-        _service = new Services.DeckService(logger, dbContext, redisSetDal);
+        var cardApiGatewayService = Substitute.For<CardApiGatewayService>();
+        _service = new Services.DeckService(logger, dbContext, redisSetDal, cardApiGatewayService);
     }
 }

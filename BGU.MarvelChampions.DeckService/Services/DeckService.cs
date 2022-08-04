@@ -2,6 +2,8 @@ using BGU.Database.Postgres;
 using BGU.Database.Postgres.Entities;
 using BGU.Database.Redis.Interfaces;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
+using BGU.MarvelChampions.Models;
+using BGU.MarvelChampions.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,12 +18,14 @@ public class DeckService : IDeckService
     private readonly ILogger<DeckService> _logger;
     private readonly DeckDbContext _dbContext;
     private readonly IRedisSetDal _redisSetDal;
+    private readonly ICardApiGatewayService _cardApiGatewayService;
 
-    public DeckService(ILogger<DeckService> logger, DeckDbContext dbContext, IRedisSetDal redisSetDal)
+    public DeckService(ILogger<DeckService> logger, DeckDbContext dbContext, IRedisSetDal redisSetDal, ICardApiGatewayService cardApiGatewayService)
     {
         _logger = logger;
         _dbContext = dbContext;
         _redisSetDal = redisSetDal;
+        _cardApiGatewayService = cardApiGatewayService;
     }
 
     public async Task<IEnumerable<DeckEntity>> GetAllAsync()
@@ -51,9 +55,10 @@ public class DeckService : IDeckService
         return await _redisSetDal.RemoveAsync(GetRedisKey(deckGuid), cardCode);
     }
 
-    public async Task<IEnumerable<string>> GetAllCards(Guid deckGuid)
+    public async Task<IEnumerable<Card>> GetAllCards(Guid deckGuid)
     {
-        return await _redisSetDal.MembersAsync(GetRedisKey(deckGuid));
+        var codes = await _redisSetDal.MembersAsync(GetRedisKey(deckGuid));
+        return await _cardApiGatewayService.GetAllByCodes(codes);
     }
 
     private string GetRedisKey(Guid deckGuid)

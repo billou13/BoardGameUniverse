@@ -1,6 +1,7 @@
 using BGU.Database.Postgres;
 using BGU.Database.Postgres.Entities;
 using BGU.Database.Redis;
+using BGU.MarvelChampions.Extensions;
 using BGU.MarvelChampions.Models;
 using BGU.MarvelChampions.DeckService.Services;
 using BGU.MarvelChampions.DeckService.Services.Interfaces;
@@ -23,6 +24,9 @@ try
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    // Configure API gateway services.
+    builder.Services.ConfigureCardApiGatewayService();
 
     builder.Services.AddAutoMapper(cfg =>
     {

@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -35,5 +37,22 @@ public abstract class ApiGatewayService
         }
 
         return await JsonSerializer.DeserializeAsync<T>(await response.Content.ReadAsStreamAsync());
+    }
+
+    protected async Task<TResponse?> RequestPostAsync<TRequest, TResponse>(string? relativeUri, TRequest data)
+    {
+        var httpClient = _httpClientFactory.CreateClient();
+        var uri = new Uri(ApiGatewayUri, relativeUri);
+        string jsonData = JsonSerializer.Serialize(data);
+        using (var content = new StringContent(jsonData, Encoding.UTF8, "application/json"))
+        {
+            var response = await httpClient.PostAsync(uri, content);
+            if (!response.IsSuccessStatusCode)
+            {
+                return default(TResponse);
+            }
+
+            return await JsonSerializer.DeserializeAsync<TResponse>(await response.Content.ReadAsStreamAsync());
+        }
     }
 }
